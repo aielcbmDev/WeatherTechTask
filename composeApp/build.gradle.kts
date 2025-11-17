@@ -1,6 +1,4 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import java.io.FileInputStream
-import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -56,11 +54,7 @@ kotlin {
         }
     }
 }
-
 android {
-    val secretProperties = Properties()
-    secretProperties.load(FileInputStream(file("../secrets.properties")))
-
     namespace = "com.something.volkswagentechtask"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
@@ -70,6 +64,9 @@ android {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
+
+        val apiKey = project.findProperty("WEATHER_API_KEY") ?: ""
+        buildConfigField("String", "WEATHER_API_KEY", "\"$apiKey\"")
     }
     buildFeatures {
         buildConfig = true
