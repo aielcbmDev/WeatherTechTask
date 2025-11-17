@@ -66,6 +66,10 @@ kotlin {
             implementation(project(":feature-weather:domain"))
             implementation(project(":feature-weather:networking"))
             implementation(project(":feature-weather:database"))
+
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
         }
 
         commonTest.dependencies {

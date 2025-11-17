@@ -65,6 +65,10 @@ kotlin {
             // Add KMP dependencies here
             implementation(project(":feature-weather:domain"))
             implementation(project(":feature-weather:core"))
+
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
         }
 
         commonTest.dependencies {
