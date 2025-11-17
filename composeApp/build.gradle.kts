@@ -66,7 +66,7 @@ android {
         versionName = "1.0"
 
         val apiKey = project.findProperty("WEATHER_API_KEY") ?: ""
-        buildConfigField("String", "WEATHER_API_KEY", "\"$apiKey\"")
+        buildConfigField("String", "WEATHER_API_KEY", "$apiKey")
     }
     buildFeatures {
         buildConfig = true
