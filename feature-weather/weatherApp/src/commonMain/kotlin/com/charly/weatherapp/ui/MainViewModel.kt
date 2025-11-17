@@ -7,6 +7,6 @@ class MainViewModel(
 ) : ViewModel() {
 
     init {
-        val x = weatherApiKey
+        println("weatherApiKey: $weatherApiKey")
     }
 }
