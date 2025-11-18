@@ -7,17 +7,17 @@ import kotlinx.serialization.Serializable
 data class DailyData(
 
     @SerialName("dt")
-    val dt: Int? = null,
+    val dt: Long? = null,
     @SerialName("sunrise")
-    val sunrise: Int? = null,
+    val sunrise: Long? = null,
     @SerialName("sunset")
-    val sunset: Int? = null,
+    val sunset: Long? = null,
     @SerialName("moonrise")
-    val moonrise: Int? = null,
+    val moonrise: Long? = null,
     @SerialName("moonset")
-    val moonset: Int? = null,
+    val moonset: Long? = null,
     @SerialName("moon_phase")
-    val moonPhase: Double? = null,
+    val moonPhase: String? = null,
     @SerialName("summary")
     val summary: String? = null,
     @SerialName("temp")
@@ -25,17 +25,17 @@ data class DailyData(
     @SerialName("feels_like")
     val feelsLike: FeelsLikeData? = null,
     @SerialName("pressure")
-    val pressure: Int? = null,
+    val pressure: String? = null,
     @SerialName("humidity")
-    val humidity: Int? = null,
+    val humidity: String? = null,
     @SerialName("dew_point")
-    val dewPoint: Double? = null,
+    val dewPoint: String? = null,
     @SerialName("wind_speed")
-    val windSpeed: Double? = null,
+    val windSpeed: String? = null,
     @SerialName("wind_deg")
-    val windDeg: Int? = null,
+    val windDeg: String? = null,
     @SerialName("wind_gust")
-    val windGust: Double? = null,
+    val windGust: String? = null,
     @SerialName("weather")
     val weather: ArrayList<WeatherData> = arrayListOf(),
     @SerialName("clouds")
@@ -43,5 +43,5 @@ data class DailyData(
     @SerialName("pop")
     val pop: Int? = null,
     @SerialName("uvi")
-    val uvi: Double? = null
+    val uvi: String? = null
 )

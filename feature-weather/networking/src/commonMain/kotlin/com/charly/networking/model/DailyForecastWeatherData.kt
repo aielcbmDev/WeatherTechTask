@@ -13,7 +13,7 @@ data class DailyForecastWeatherData(
     @SerialName("timezone")
     val timezone: String? = null,
     @SerialName("timezone_offset")
-    val timezoneOffset: Int? = null,
+    val timezoneOffset: Long? = null,
     @SerialName("daily")
     val daily: List<DailyData> = emptyList()
 )

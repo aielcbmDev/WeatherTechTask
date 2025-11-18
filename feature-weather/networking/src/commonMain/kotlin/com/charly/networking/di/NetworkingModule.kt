@@ -3,6 +3,7 @@ package com.charly.networking.di
 import com.charly.diqualifiers.DI_IS_DEBUG
 import com.charly.diqualifiers.DI_WEATHER_API_KEY
 import com.charly.networking.WeatherApiService
+import com.charly.networking.WeatherUnits
 import com.charly.networking.datasource.NetworkingDataSource
 import com.charly.networking.httpclient.HttpClientFactory
 import io.ktor.client.HttpClient
@@ -26,6 +27,7 @@ val networkingModule = module {
     factory<WeatherApiService> {
         WeatherApiService(
             weatherApiKey = get(named(DI_WEATHER_API_KEY)),
+            weatherUnits = WeatherUnits.STANDARD,
             httpClient = get()
         )
     }

@@ -7,6 +7,7 @@ import io.ktor.client.request.get
 
 class WeatherApiService(
     private val weatherApiKey: String,
+    private val weatherUnits: WeatherUnits,
     private val httpClient: HttpClient
 ) {
 
@@ -14,7 +15,7 @@ class WeatherApiService(
         latitude: String,
         longitude: String
     ): DailyForecastWeatherData {
-        val url = generateUrl(latitude, longitude, weatherApiKey)
+        val url = generateUrl(latitude, longitude, weatherUnits, weatherApiKey)
         return httpClient.get(url).body<DailyForecastWeatherData>()
     }
 
@@ -23,9 +24,10 @@ class WeatherApiService(
         fun generateUrl(
             latitude: String,
             longitude: String,
+            weatherUnits: WeatherUnits,
             weatherApiKey: String
         ): String {
-            return "https://api.openweathermap.org/data/3.0/onecall?lat=$latitude&lon=$longitude&exclude=current,minutely,hourly,alerts&appid=$weatherApiKey"
+            return "https://api.openweathermap.org/data/3.0/onecall?lat=$latitude&lon=$longitude&units=${weatherUnits.units}&exclude=current,minutely,hourly,alerts&appid=$weatherApiKey"
         }
     }
 }

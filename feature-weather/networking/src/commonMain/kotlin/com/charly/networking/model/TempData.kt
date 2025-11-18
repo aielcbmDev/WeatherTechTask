@@ -7,15 +7,15 @@ import kotlinx.serialization.Serializable
 data class TempData(
 
     @SerialName("day")
-    val day: Double? = null,
+    val day: String? = null,
     @SerialName("min")
-    val min: Double? = null,
+    val min: String? = null,
     @SerialName("max")
-    val max: Double? = null,
+    val max: String? = null,
     @SerialName("night")
-    val night: Double? = null,
+    val night: String? = null,
     @SerialName("eve")
-    val eve: Double? = null,
+    val eve: String? = null,
     @SerialName("morn")
-    val morn: Double? = null
+    val morn: String? = null
 )
