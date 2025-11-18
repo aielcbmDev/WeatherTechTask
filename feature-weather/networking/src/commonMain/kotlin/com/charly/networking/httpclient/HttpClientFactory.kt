@@ -1,5 +1,6 @@
 package com.charly.networking.httpclient
 
+import com.charly.networking.OpenClassForMocking
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -12,6 +13,7 @@ import io.ktor.http.HttpHeaders
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
+@OpenClassForMocking
 class HttpClientFactory(
     private val isDebug: Boolean,
     private val httpClientEngine: HttpClientEngine

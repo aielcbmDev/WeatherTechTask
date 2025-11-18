@@ -29,7 +29,7 @@ data class DailyData(
     @SerialName("humidity")
     val humidity: Int? = null,
     @SerialName("dew_point")
-    val dewPoint: Int? = null,
+    val dewPoint: Double? = null,
     @SerialName("wind_speed")
     val windSpeed: Double? = null,
     @SerialName("wind_deg")

@@ -7,9 +7,9 @@ import kotlinx.serialization.Serializable
 data class DailyForecastWeatherData(
 
     @SerialName("lat")
-    val lat: Double? = null,
+    val lat: String? = null,
     @SerialName("lon")
-    val lon: Double? = null,
+    val lon: String? = null,
     @SerialName("timezone")
     val timezone: String? = null,
     @SerialName("timezone_offset")
