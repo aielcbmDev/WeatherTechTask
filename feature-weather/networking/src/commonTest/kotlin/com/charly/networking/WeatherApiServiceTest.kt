@@ -49,11 +49,9 @@ class WeatherApiServiceTest {
             weatherUnits = WeatherUnits.STANDARD,
             httpClient = httpClientFactory.createHttpClient()
         )
-        val latitude = "any latitude"
-        val longitude = "any longitude"
 
         // WHEN
-        val result = weatherApiService.getDailyForecastWeatherData(latitude, longitude)
+        val result = weatherApiService.getDailyWeatherForecastData()
 
         // THEN
         assertEquals("40.4983", result.lat)
@@ -85,12 +83,10 @@ class WeatherApiServiceTest {
                 weatherUnits = WeatherUnits.STANDARD,
                 httpClient = httpClientFactory.createHttpClient()
             )
-            val latitude = "any latitude"
-            val longitude = "any longitude"
 
             // WHEN
             val actualException = assertFailsWith<Exception> {
-                weatherApiService.getDailyForecastWeatherData(latitude, longitude)
+                weatherApiService.getDailyWeatherForecastData()
             }
 
             // THEN

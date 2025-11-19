@@ -11,23 +11,21 @@ class WeatherApiService(
     private val httpClient: HttpClient
 ) {
 
-    suspend fun getDailyForecastWeatherData(
-        latitude: String,
-        longitude: String
-    ): DailyForecastWeatherData {
-        val url = generateUrl(latitude, longitude, weatherUnits, weatherApiKey)
+    suspend fun getDailyWeatherForecastData(): DailyForecastWeatherData {
+        val url = generateUrl(weatherUnits, weatherApiKey)
         return httpClient.get(url).body<DailyForecastWeatherData>()
     }
 
     private companion object Companion {
 
+        private const val HARDCODED_LONGITUDE = "-74.0060"
+        private const val HARDCODED_LATITUDE = "40.7128"
+
         fun generateUrl(
-            latitude: String,
-            longitude: String,
             weatherUnits: WeatherUnits,
             weatherApiKey: String
         ): String {
-            return "https://api.openweathermap.org/data/3.0/onecall?lat=$latitude&lon=$longitude&units=${weatherUnits.units}&exclude=current,minutely,hourly,alerts&appid=$weatherApiKey"
+            return "https://api.openweathermap.org/data/3.0/onecall?lat=$HARDCODED_LATITUDE&lon=$HARDCODED_LONGITUDE&units=${weatherUnits.units}&exclude=current,minutely,hourly,alerts&appid=$weatherApiKey"
         }
     }
 }

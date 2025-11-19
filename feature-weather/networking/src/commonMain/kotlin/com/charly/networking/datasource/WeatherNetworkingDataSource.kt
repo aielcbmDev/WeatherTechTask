@@ -7,10 +7,7 @@ class WeatherNetworkingDataSource(
     private val weatherApiService: WeatherApiService
 ) {
 
-    suspend fun execute(
-        latitude: String,
-        longitude: String
-    ): DailyForecastWeatherData {
-        return weatherApiService.getDailyForecastWeatherData(latitude, longitude)
+    suspend fun getDailyWeatherForecastData(): DailyForecastWeatherData {
+        return weatherApiService.getDailyWeatherForecastData()
     }
 }
