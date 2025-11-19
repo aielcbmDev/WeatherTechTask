@@ -29,4 +29,8 @@ class TimerCache(
             elapsedTime > CACHE_TIME.hours
         }
     }
+
+    suspend fun saveCacheTime() {
+        datastoreDataSource.saveLongValue(CACHE_KEY, clock.now().toEpochMilliseconds())
+    }
 }

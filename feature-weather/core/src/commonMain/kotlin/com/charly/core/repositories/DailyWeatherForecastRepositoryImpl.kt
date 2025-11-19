@@ -10,9 +10,7 @@ import com.charly.networking.datasource.WeatherNetworkingDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.transform
-import kotlin.time.ExperimentalTime
 
-@OptIn(ExperimentalTime::class)
 class DailyWeatherForecastRepositoryImpl(
     private val timerCache: TimerCache,
     private val weatherDatabaseDataSource: WeatherDatabaseDataSource,
@@ -28,6 +26,7 @@ class DailyWeatherForecastRepositoryImpl(
                 if (timerCache.isCacheExpired()) {
                     val dailyWeatherForecastData =
                         weatherNetworkDataSource.getDailyWeatherForecastData()
+                    timerCache.saveCacheTime()
                     val dailyEntityList = dailyWeatherForecastData.mapToDailyEntityList()
                     weatherDatabaseDataSource.insertDailyWeatherForecastList(dailyEntityList)
                 }
