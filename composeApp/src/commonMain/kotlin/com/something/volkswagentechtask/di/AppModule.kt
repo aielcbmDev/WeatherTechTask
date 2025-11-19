@@ -23,6 +23,7 @@ val appModule = module {
     viewModel {
         MainViewModel(
             weatherApiKey = get(named(DI_WEATHER_API_KEY)),
+            dailyWeatherForecastUseCase = get()
         )
     }
 }
