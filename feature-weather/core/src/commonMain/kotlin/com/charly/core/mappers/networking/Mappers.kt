@@ -1,4 +1,4 @@
-package com.charly.core.networking.mappers
+package com.charly.core.mappers.networking
 
 import com.charly.database.model.DailyEntity
 import com.charly.networking.model.DailyData

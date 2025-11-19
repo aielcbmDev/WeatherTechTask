@@ -1,8 +1,8 @@
 package com.charly.core.repositories
 
 import com.charly.core.cache.TimerCache
-import com.charly.core.database.mappers.mapToDailyList
-import com.charly.core.networking.mappers.mapToDailyEntityList
+import com.charly.core.mappers.database.mapToDailyList
+import com.charly.core.mappers.networking.mapToDailyEntityList
 import com.charly.database.datasources.WeatherDatabaseDataSource
 import com.charly.domain.model.Daily
 import com.charly.domain.repositories.DailyWeatherForecastRepository

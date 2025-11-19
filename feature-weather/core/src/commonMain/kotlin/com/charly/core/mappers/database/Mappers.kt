@@ -1,23 +1,7 @@
-package com.charly.core.database.mappers
+package com.charly.core.mappers.database
 
 import com.charly.database.model.DailyEntity
 import com.charly.domain.model.Daily
-
-internal fun Daily.mapToDailyEntity(): DailyEntity {
-    return DailyEntity(
-        id = id,
-        dt = dt,
-        sunrise = sunrise,
-        sunset = sunset,
-        summary = summary,
-        minTemp = minTemp,
-        maxTemp = maxTemp
-    )
-}
-
-internal fun List<Daily>.mapToDailyEntityList(): List<DailyEntity> {
-    return map { it.mapToDailyEntity() }
-}
 
 internal fun DailyEntity.mapToDaily(): Daily {
     return Daily(
