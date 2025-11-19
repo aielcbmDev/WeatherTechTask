@@ -1,3 +1,5 @@
+import dev.mokkery.gradle.mokkery
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
@@ -12,7 +14,7 @@ kotlin {
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
-        namespace = "com.charly.core"
+        namespace = "com.charly.datastore"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
 
@@ -34,7 +36,7 @@ kotlin {
     // A step-by-step guide on how to include this library in an XCode
     // project can be found here:
     // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "coreKit"
+    val xcfName = "datastoreKit"
 
     iosX64 {
         binaries.framework {
@@ -63,24 +65,25 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlin.stdlib)
             // Add KMP dependencies here
-            implementation(project(":feature-weather:domain"))
-            implementation(project(":feature-weather:networking"))
-            implementation(project(":feature-weather:database"))
-            implementation(project(":feature-weather:datastore"))
+            implementation(libs.androidx.datastore)
+            implementation(libs.androidx.datastore.preferences)
 
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
         }
 
         commonTest.dependencies {
+            implementation(mokkery("coroutines"))
             implementation(libs.kotlinx.test)
+            implementation(libs.kotlinx.coroutines.test)
         }
 
         androidMain.dependencies {
             // Add Android-specific dependencies here. Note that this source set depends on
             // commonMain by default and will correctly pull the Android artifacts of any KMP
             // dependencies declared in commonMain.
+            implementation(libs.koin.android)
+            implementation(libs.koin.core)
         }
 
         getByName("androidDeviceTest").dependencies {
@@ -111,6 +114,6 @@ val isTesting = gradle
 
 if (isTesting) {
     allOpen {
-        annotation("com.charly.core.OpenClassForMocking")
+        annotation("com.charly.datastore.OpenClassForMocking")
     }
 }
