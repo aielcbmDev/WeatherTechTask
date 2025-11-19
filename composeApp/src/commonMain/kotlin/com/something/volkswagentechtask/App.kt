@@ -2,8 +2,7 @@ package com.something.volkswagentechtask
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import com.charly.core.di.coreModule
-import com.charly.domain.di.domainModule
+import com.charly.weatherapp.di.weatherAppModule
 import com.charly.weatherapp.ui.MainViewModel
 import com.something.volkswagentechtask.di.appModule
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -16,11 +15,7 @@ import org.koin.dsl.KoinAppDeclaration
 fun App(koinAppDeclaration: KoinAppDeclaration? = null) {
     KoinApplication(application = {
         koinAppDeclaration?.invoke(this)
-        modules(
-            appModule,
-            domainModule,
-            coreModule
-        )
+        modules(appModule, weatherAppModule)
     }) {
         MaterialTheme {
             MainNavigationHost()
