@@ -16,14 +16,14 @@ val coreModule = module {
     includes(datastoreModule)
     includes(networkingModule)
 
-    single<Clock> { Clock.System }
-    single<TimerCache> {
+    factory<Clock> { Clock.System }
+    factory<TimerCache> {
         TimerCache(
             clock = get(),
             datastoreDataSource = get()
         )
     }
-    single<DailyWeatherForecastRepository> {
+    factory<DailyWeatherForecastRepository> {
         DailyWeatherForecastRepositoryImpl(
             timerCache = get(),
             weatherDatabaseDataSource = get(),

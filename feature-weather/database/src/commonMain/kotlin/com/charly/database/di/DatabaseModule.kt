@@ -16,7 +16,7 @@ val databaseModule = module {
         get<RoomDatabase.Builder<WeatherDatabase>>().getRoomDatabase()
     }
 
-    single<WeatherDatabaseDataSource> {
+    factory<WeatherDatabaseDataSource> {
         val dailyDao = get<WeatherDatabase>().getDailyDao()
         WeatherDatabaseDataSource(dailyDao)
     }
