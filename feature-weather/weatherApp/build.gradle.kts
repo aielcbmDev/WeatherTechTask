@@ -3,6 +3,8 @@ import dev.mokkery.gradle.mokkery
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.androidLint)
     alias(libs.plugins.mokkeryPlugin)
     alias(libs.plugins.kotlinAllOpen)
@@ -68,6 +70,12 @@ kotlin {
             implementation(project(":di-qualifiers"))
             implementation(project(":feature-weather:domain"))
             implementation(project(":feature-weather:core"))
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
 
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.compose)
