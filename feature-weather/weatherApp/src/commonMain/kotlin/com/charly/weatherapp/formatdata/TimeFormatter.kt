@@ -11,15 +11,9 @@ class TimeFormatter(
     private val timeZone: TimeZone
 ) {
 
-    fun formatEpochSeconds(
-        epochSeconds: Long?
-    ): String? {
-        if (epochSeconds == null) return null
-        return formatEpochSecondsToString(epochSeconds)
-    }
-
     @OptIn(ExperimentalTime::class)
-    private fun formatEpochSecondsToString(epochSeconds: Long): String {
+    fun formatEpochSecondsToString(epochSeconds: Long?): String? {
+        if (epochSeconds == null) return null
         val instant: Instant = Instant.fromEpochSeconds(epochSeconds)
         val datetime: LocalDateTime = instant.toLocalDateTime(timeZone)
         return datetime.formatToString()

@@ -10,9 +10,9 @@ internal fun DailyForecast.mapToDailyForecastModel(
 ): DailyForecastModel {
     return DailyForecastModel(
         id = id,
-        dt = timeFormatter.formatEpochSeconds(dt) ?: noDataAvailable,
-        sunrise = timeFormatter.formatEpochSeconds(sunrise) ?: noDataAvailable,
-        sunset = timeFormatter.formatEpochSeconds(sunset) ?: noDataAvailable,
+        dt = timeFormatter.formatEpochSecondsToString(dt) ?: noDataAvailable,
+        sunrise = timeFormatter.formatEpochSecondsToString(sunrise) ?: noDataAvailable,
+        sunset = timeFormatter.formatEpochSecondsToString(sunset) ?: noDataAvailable,
         summary = summary ?: noDataAvailable,
         minTemp = minTemp ?: noDataAvailable,
         maxTemp = maxTemp ?: noDataAvailable
