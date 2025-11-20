@@ -19,7 +19,7 @@ kotlin {
         namespace = "com.charly.weatherapp"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
-
+        androidResources.enable = true
         withHostTestBuilder {
             sourceSetTreeName = "test"
         }
@@ -80,6 +80,8 @@ kotlin {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+
+            implementation(libs.kotlinx.datetime)
         }
 
         commonTest.dependencies {
