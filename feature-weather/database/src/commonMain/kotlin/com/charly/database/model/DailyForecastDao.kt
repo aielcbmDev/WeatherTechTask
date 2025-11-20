@@ -13,11 +13,11 @@ interface DailyForecastDao {
     fun getDailyWeatherForecastList(): Flow<List<DailyForecastEntity>>
 
     @Query("SELECT * FROM daily_weather_table WHERE id = :id")
-    fun getDailyWeatherForecastById(id: Long): DailyForecastEntity
+    suspend fun getDailyWeatherForecastById(id: Long): DailyForecastEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertOrReplaceListOfDailyWeatherForecast(dailyForecastEntityList: List<DailyForecastEntity>)
+    suspend fun insertOrReplaceListOfDailyWeatherForecast(dailyForecastEntityList: List<DailyForecastEntity>)
 
     @Query("DELETE from daily_weather_table")
-    fun deleteDailyWeatherForecastTable()
+    suspend fun deleteDailyWeatherForecastTable()
 }

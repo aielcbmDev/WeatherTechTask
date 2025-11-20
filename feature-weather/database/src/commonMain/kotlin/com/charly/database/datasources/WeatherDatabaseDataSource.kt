@@ -12,15 +12,15 @@ class WeatherDatabaseDataSource(
         return dailyForecastDao.getDailyWeatherForecastList()
     }
 
-    fun getDailyWeatherForecastById(id: Long): DailyForecastEntity {
+    suspend fun getDailyWeatherForecastById(id: Long): DailyForecastEntity {
         return dailyForecastDao.getDailyWeatherForecastById(id)
     }
 
-    fun insertDailyWeatherForecastList(dailyForecastEntityList: List<DailyForecastEntity>) {
+    suspend fun insertDailyWeatherForecastList(dailyForecastEntityList: List<DailyForecastEntity>) {
         dailyForecastDao.insertOrReplaceListOfDailyWeatherForecast(dailyForecastEntityList)
     }
 
-    fun deleteDailyWeatherForecastTable() {
+    suspend fun deleteDailyWeatherForecastTable() {
         dailyForecastDao.deleteDailyWeatherForecastTable()
     }
 }
