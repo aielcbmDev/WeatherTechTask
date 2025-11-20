@@ -15,5 +15,5 @@ data class DailyForecastWeatherData(
     @SerialName("timezone_offset")
     val timezoneOffset: Long? = null,
     @SerialName("daily")
-    val daily: List<DailyData> = emptyList()
+    val daily: List<DailyForecastData> = emptyList()
 )

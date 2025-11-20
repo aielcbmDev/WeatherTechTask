@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class DailyData(
+data class DailyForecastData(
 
     @SerialName("dt")
     val dt: Long? = null,

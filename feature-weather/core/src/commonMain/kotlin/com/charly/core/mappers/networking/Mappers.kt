@@ -1,10 +1,10 @@
 package com.charly.core.mappers.networking
 
 import com.charly.database.model.DailyForecastEntity
-import com.charly.networking.model.DailyData
+import com.charly.networking.model.DailyForecastData
 import com.charly.networking.model.DailyForecastWeatherData
 
-private fun DailyData.mapToDailyEntity(): DailyForecastEntity {
+private fun DailyForecastData.mapToDailyEntity(): DailyForecastEntity {
     return DailyForecastEntity(
         dt = dt,
         sunrise = sunrise,
