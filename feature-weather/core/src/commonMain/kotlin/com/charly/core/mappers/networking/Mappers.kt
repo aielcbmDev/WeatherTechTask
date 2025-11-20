@@ -16,8 +16,8 @@ private fun DailyData.mapToDailyEntity(): DailyForecastEntity {
 }
 
 /**
- * This function is responsible for mapping the incoming DailyForecastWeatherData DTO (Data Transfer
- * Object) from the network layer to a list of DailyEntity objects for the data layer.
+ * This function is responsible for mapping the incoming DailyForecastWeatherData from the network
+ * module to a list of DailyEntity objects for the database module.
  *
  * This mapping stage determines which data fields are persisted and used within the app, and which
  * are discarded. For the purpose of this task, only a few key parameters are mapped to maintain

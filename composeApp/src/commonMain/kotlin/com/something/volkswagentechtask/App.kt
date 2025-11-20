@@ -7,6 +7,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.charly.weatherapp.di.weatherAppModule
 import com.charly.weatherapp.ui.mainscreen.MainScreen
 import com.charly.weatherapp.ui.mainscreen.MainViewModel
+import com.charly.weatherapp.ui.mainscreen.ViewIntent
 import com.something.volkswagentechtask.di.appModule
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinApplication
@@ -33,6 +34,6 @@ private fun MainNavigationHost() {
     MainScreen(
         mainScreenState = mainScreenState,
         onDailyForecastModelClick = {},
-        onRetryButtonClicked = {}
+        onRetryButtonClicked = { mainViewModel.handleIntent(ViewIntent.FetchDailyWeatherForecast) }
     )
 }
