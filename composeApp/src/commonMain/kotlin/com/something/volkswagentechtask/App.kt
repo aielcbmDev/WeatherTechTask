@@ -2,8 +2,11 @@ package com.something.volkswagentechtask
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.charly.weatherapp.di.weatherAppModule
-import com.charly.weatherapp.ui.MainViewModel
+import com.charly.weatherapp.ui.mainscreen.MainScreen
+import com.charly.weatherapp.ui.mainscreen.MainViewModel
 import com.something.volkswagentechtask.di.appModule
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinApplication
@@ -25,5 +28,11 @@ fun App(koinAppDeclaration: KoinAppDeclaration? = null) {
 
 @Composable
 private fun MainNavigationHost() {
-    koinViewModel<MainViewModel>()
+    val mainViewModel = koinViewModel<MainViewModel>()
+    val mainScreenState by mainViewModel.state.collectAsStateWithLifecycle()
+    MainScreen(
+        mainScreenState = mainScreenState,
+        onDailyForecastModelClick = {},
+        onRetryButtonClicked = {}
+    )
 }
