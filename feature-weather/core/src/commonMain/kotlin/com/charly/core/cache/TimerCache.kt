@@ -17,9 +17,9 @@ class TimerCache(
     private val datastoreDataSource: DatastoreDataSource,
 ) {
     suspend fun isCacheExpired(): Boolean {
-        val currentInstant: Instant = clock.now()
         // If no time is saved, treat it as expired to trigger an initial fetch.
         val savedTimeInMillis = datastoreDataSource.getLongValue(CACHE_KEY).first() ?: return true
+        val currentInstant = clock.now()
         val savedInstant = Instant.fromEpochMilliseconds(savedTimeInMillis)
         val elapsedTime = currentInstant - savedInstant
         // Check if more than one hour has passed
