@@ -19,16 +19,17 @@ class DailyWeatherForecastRepositoryImpl(
 
     override suspend fun getDailyWeatherForecastList(): Flow<List<Daily>> {
         return weatherDatabaseDataSource.getDailyWeatherForecastList()
-            .onStart {
-                if (timerCache.isCacheExpired()) {
-                    val dailyWeatherForecastData =
-                        weatherNetworkDataSource.getDailyWeatherForecastData()
-                    timerCache.saveCacheTime()
-                    weatherDatabaseDataSource.deleteDailyWeatherForecastTable()
-                    val dailyEntityList = dailyWeatherForecastData.mapToDailyEntityList()
-                    weatherDatabaseDataSource.insertDailyWeatherForecastList(dailyEntityList)
-                }
-            }
+            .onStart { fetchAndSaveDailyWeatherForecast() }
             .map { it.mapToDailyList() }
+    }
+
+    private suspend fun fetchAndSaveDailyWeatherForecast() {
+        if (timerCache.isCacheExpired()) {
+            val dailyWeatherForecastData = weatherNetworkDataSource.getDailyWeatherForecastData()
+            timerCache.saveCacheTime()
+            weatherDatabaseDataSource.deleteDailyWeatherForecastTable()
+            val dailyEntityList = dailyWeatherForecastData.mapToDailyEntityList()
+            weatherDatabaseDataSource.insertDailyWeatherForecastList(dailyEntityList)
+        }
     }
 }
