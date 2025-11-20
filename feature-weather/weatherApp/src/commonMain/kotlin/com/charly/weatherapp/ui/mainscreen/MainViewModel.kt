@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val weatherApiKey: String,
     private val dailyWeatherForecastUseCase: DailyWeatherForecastUseCase,
     private val timeFormatter: TimeFormatter
 ) : ViewModel() {
@@ -31,7 +30,6 @@ class MainViewModel(
     val state: StateFlow<MainScreenState> = _state.asStateFlow()
 
     init {
-        println("weatherApiKey: $weatherApiKey")
         fetchDailyWeatherForecast()
     }
 
