@@ -1,4 +1,4 @@
-package com.charly.weatherapp.ui.mainscreen.loading
+package com.charly.weatherapp.ui.common.loading
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun MainScreenLoading() {
+fun ScreenLoading() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -28,5 +28,5 @@ fun MainScreenLoading() {
 @Preview
 @Composable
 fun MainScreenLoadingPreview() {
-    MainScreenLoading()
+    ScreenLoading()
 }

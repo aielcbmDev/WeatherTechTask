@@ -1,4 +1,4 @@
-package com.charly.weatherapp.ui.mainscreen.error
+package com.charly.weatherapp.ui.common.error
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,7 @@ import volkswagentechtask.feature_weather.weatherapp.generated.resources.error_f
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.retry_button_text
 
 @Composable
-fun MainScreenError(
+fun ScreenError(
     onRetryButtonClicked: () -> Unit
 ) {
     Column(
@@ -54,7 +54,7 @@ fun MainScreenError(
 fun MainScreenErrorPreview(
     onRetryButtonClicked: () -> Unit = {}
 ) {
-    MainScreenError(
+    ScreenError(
         onRetryButtonClicked = onRetryButtonClicked
     )
 }
