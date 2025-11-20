@@ -8,20 +8,35 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.charly.weatherapp.model.DailyForecastModel
+import org.jetbrains.compose.resources.stringResource
+import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
+import volkswagentechtask.feature_weather.weatherapp.generated.resources.main_screen_top_app_bar_title
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreenSuccess(
     dailyForecastModelList: List<DailyForecastModel>,
     onDailyForecastModelClick: (Long) -> Unit,
 ) {
-    Scaffold { padding ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(stringResource(Res.string.main_screen_top_app_bar_title)) },
+                colors = TopAppBarDefaults.topAppBarColors(titleContentColor = Color.Red)
+            )
+        }
+    ) { padding ->
         val state = rememberLazyListState()
         LazyColumn(
             state = state,
