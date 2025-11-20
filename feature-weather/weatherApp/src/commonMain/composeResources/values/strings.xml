@@ -8,4 +8,11 @@
     <string name="retry_button_text">Retry</string>
 
     <string name="data_not_available_text">Not available</string>
+
+    <string name="detail_screen_top_app_bar_title_text">Weather for %s</string>
+    <string name="detail_screen_sunrise_title">Sunrise</string>
+    <string name="detail_screen_sunset_title">Sunset</string>
+    <string name="detail_screen_minimum_temperature_title">Minimum temperature</string>
+    <string name="detail_screen_maximum_temperature_title">Maximum temperature</string>
+    <string name="detail_screen_summary_title">Summary</string>
 </resources>

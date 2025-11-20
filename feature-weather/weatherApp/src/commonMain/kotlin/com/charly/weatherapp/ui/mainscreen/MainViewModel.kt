@@ -3,6 +3,7 @@ package com.charly.weatherapp.ui.mainscreen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charly.domain.usecases.GetDailyWeatherForecastListUseCase
+import com.charly.weatherapp.formatdata.DateFormatter
 import com.charly.weatherapp.formatdata.TimeFormatter
 import com.charly.weatherapp.mappers.mapToDailyForecastModelList
 import com.charly.weatherapp.model.DailyForecastModel
@@ -22,6 +23,7 @@ import volkswagentechtask.feature_weather.weatherapp.generated.resources.data_no
 
 class MainViewModel(
     private val getDailyWeatherForecastListUseCase: GetDailyWeatherForecastListUseCase,
+    private val dateFormatter: DateFormatter,
     private val timeFormatter: TimeFormatter
 ) : ViewModel() {
 
@@ -36,9 +38,9 @@ class MainViewModel(
         fetchDailyWeatherForecast()
     }
 
-    fun handleIntent(viewIntent: ViewIntent) {
-        when (viewIntent) {
-            is ViewIntent.FetchDailyWeatherForecast -> fetchDailyWeatherForecast()
+    fun handleIntent(mainViewIntent: MainViewIntent) {
+        when (mainViewIntent) {
+            is MainViewIntent.FetchDailyWeatherForecast -> fetchDailyWeatherForecast()
         }
     }
 
@@ -48,7 +50,7 @@ class MainViewModel(
             getDailyWeatherForecastListUseCase.execute()
                 .map {
                     val noDataAvailable = getString(Res.string.data_not_available_text)
-                    it.mapToDailyForecastModelList(timeFormatter, noDataAvailable)
+                    it.mapToDailyForecastModelList(dateFormatter, timeFormatter, noDataAvailable)
                 }
                 .flowOn(Dispatchers.IO)
                 .collect { dailyForecastModelList ->
@@ -71,6 +73,6 @@ sealed interface MainUiState {
     object Error : MainUiState
 }
 
-sealed interface ViewIntent {
-    object FetchDailyWeatherForecast : ViewIntent
+sealed interface MainViewIntent {
+    object FetchDailyWeatherForecast : MainViewIntent
 }

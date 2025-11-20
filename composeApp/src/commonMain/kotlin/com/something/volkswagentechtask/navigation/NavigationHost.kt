@@ -10,10 +10,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.charly.weatherapp.ui.detailscreen.DetailScreen
+import com.charly.weatherapp.ui.detailscreen.DetailViewIntent
 import com.charly.weatherapp.ui.detailscreen.DetailViewModel
 import com.charly.weatherapp.ui.mainscreen.MainScreen
+import com.charly.weatherapp.ui.mainscreen.MainViewIntent
 import com.charly.weatherapp.ui.mainscreen.MainViewModel
-import com.charly.weatherapp.ui.mainscreen.ViewIntent
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -32,7 +34,7 @@ fun WeatherNavigationHost() {
                 onDailyForecastModelClick = { id ->
                     navController.navigate(Destination.Detail(id).route)
                 },
-                onRetryButtonClicked = { mainViewModel.handleIntent(ViewIntent.FetchDailyWeatherForecast) }
+                onRetryButtonClicked = { mainViewModel.handleIntent(MainViewIntent.FetchDailyWeatherForecast) }
             )
         }
         composable(
@@ -46,6 +48,11 @@ fun WeatherNavigationHost() {
             val itemId = savedStateHandle.get<Long>(Destination.Detail.ARG_ITEM_ID)!!
             val detailViewModel = koinViewModel<DetailViewModel>(
                 parameters = { org.koin.core.parameter.parametersOf(itemId) }
+            )
+            val detailScreenState by detailViewModel.state.collectAsStateWithLifecycle()
+            DetailScreen(
+                detailScreenState = detailScreenState,
+                onRetryButtonClicked = { detailViewModel.handleIntent(DetailViewIntent.FetchDailyWeatherForecastById) }
             )
         }
     }

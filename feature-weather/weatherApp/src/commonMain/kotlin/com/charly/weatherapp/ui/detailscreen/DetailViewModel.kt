@@ -3,6 +3,7 @@ package com.charly.weatherapp.ui.detailscreen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charly.domain.usecases.GetDailyWeatherForecastByIdUseCase
+import com.charly.weatherapp.formatdata.DateFormatter
 import com.charly.weatherapp.formatdata.TimeFormatter
 import com.charly.weatherapp.mappers.mapToDailyForecastModel
 import com.charly.weatherapp.model.DailyForecastModel
@@ -15,10 +16,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.jetbrains.compose.resources.getString
+import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
+import volkswagentechtask.feature_weather.weatherapp.generated.resources.data_not_available_text
 
 class DetailViewModel(
     private val itemId: Long,
     private val getDailyWeatherForecastByIdUseCase: GetDailyWeatherForecastByIdUseCase,
+    private val dateFormatter: DateFormatter,
     private val timeFormatter: TimeFormatter
 ) : ViewModel() {
 
@@ -33,9 +38,9 @@ class DetailViewModel(
         fetchDailyWeatherForecastById()
     }
 
-    fun handleIntent(viewIntent: ViewIntent) {
+    fun handleIntent(viewIntent: DetailViewIntent) {
         when (viewIntent) {
-            is ViewIntent.FetchDailyWeatherForecastById -> fetchDailyWeatherForecastById()
+            is DetailViewIntent.FetchDailyWeatherForecastById -> fetchDailyWeatherForecastById()
         }
     }
 
@@ -44,7 +49,11 @@ class DetailViewModel(
         viewModelScope.launch(exceptionHandler) {
             val dailyForecastModel = withContext(Dispatchers.IO) {
                 getDailyWeatherForecastByIdUseCase.execute(itemId)
-                    .mapToDailyForecastModel(timeFormatter, "n/a")
+                    .mapToDailyForecastModel(
+                        dateFormatter = dateFormatter,
+                        timeFormatter = timeFormatter,
+                        noDataAvailable = getString(Res.string.data_not_available_text)
+                    )
             }
             _state.update {
                 it.copy(detailUiState = DetailUiState.Success(dailyForecastModel = dailyForecastModel))
@@ -66,6 +75,6 @@ sealed interface DetailUiState {
     object Error : DetailUiState
 }
 
-sealed interface ViewIntent {
-    object FetchDailyWeatherForecastById : ViewIntent
+sealed interface DetailViewIntent {
+    object FetchDailyWeatherForecastById : DetailViewIntent
 }
