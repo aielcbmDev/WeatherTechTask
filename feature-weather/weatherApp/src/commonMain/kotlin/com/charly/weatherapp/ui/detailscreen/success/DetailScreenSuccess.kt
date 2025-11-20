@@ -29,7 +29,8 @@ import volkswagentechtask.feature_weather.weatherapp.generated.resources.detail_
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreenSuccess(
-    dailyForecastModel: DailyForecastModel
+    dailyForecastModel: DailyForecastModel,
+    onBackButtonClicked: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -37,7 +38,7 @@ fun DetailScreenSuccess(
                 title = { Text(dailyForecastModel.dt) },
                 colors = TopAppBarDefaults.topAppBarColors(titleContentColor = Color.Red),
                 navigationIcon = {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = { onBackButtonClicked.invoke() }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },

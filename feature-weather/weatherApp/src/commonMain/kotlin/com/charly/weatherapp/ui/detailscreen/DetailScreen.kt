@@ -8,11 +8,16 @@ import com.charly.weatherapp.ui.detailscreen.success.DetailScreenSuccess
 @Composable
 fun DetailScreen(
     detailScreenState: DetailScreenState,
-    onRetryButtonClicked: () -> Unit
+    onRetryButtonClicked: () -> Unit,
+    onBackButtonClicked: () -> Unit
 ) {
     when (val detailUiState = detailScreenState.detailUiState) {
         is DetailUiState.Loading -> ScreenLoading()
-        is DetailUiState.Success -> DetailScreenSuccess(dailyForecastModel = detailUiState.dailyForecastModel)
+        is DetailUiState.Success -> DetailScreenSuccess(
+            dailyForecastModel = detailUiState.dailyForecastModel,
+            onBackButtonClicked = onBackButtonClicked
+        )
+
         is DetailUiState.Error -> ScreenError(onRetryButtonClicked)
     }
 }

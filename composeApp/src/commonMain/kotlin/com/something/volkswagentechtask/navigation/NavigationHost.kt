@@ -52,7 +52,8 @@ fun WeatherNavigationHost() {
             val detailScreenState by detailViewModel.state.collectAsStateWithLifecycle()
             DetailScreen(
                 detailScreenState = detailScreenState,
-                onRetryButtonClicked = { detailViewModel.handleIntent(DetailViewIntent.FetchDailyWeatherForecastById) }
+                onRetryButtonClicked = { detailViewModel.handleIntent(DetailViewIntent.FetchDailyWeatherForecastById) },
+                onBackButtonClicked = { navController.popBackStack() }
             )
         }
     }
