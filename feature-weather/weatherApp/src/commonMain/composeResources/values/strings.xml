@@ -6,4 +6,6 @@
     <string name="any_error">An error occurred.</string>
     <string name="error_fix_suggestion">Please, try again!</string>
     <string name="retry_button_text">Retry</string>
+
+    <string name="data_not_available_text">Not available</string>
 </resources>
