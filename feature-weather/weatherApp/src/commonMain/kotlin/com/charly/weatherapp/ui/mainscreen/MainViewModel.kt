@@ -16,6 +16,9 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.getString
+import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
+import volkswagentechtask.feature_weather.weatherapp.generated.resources.data_not_available_text
 
 class MainViewModel(
     private val getDailyWeatherForecastListUseCase: GetDailyWeatherForecastListUseCase,
@@ -43,7 +46,10 @@ class MainViewModel(
         _state.update { it.copy(mainUiState = MainUiState.Loading) }
         viewModelScope.launch(exceptionHandler) {
             getDailyWeatherForecastListUseCase.execute()
-                .map { it.mapToDailyForecastModelList(timeFormatter, "n/a") }
+                .map {
+                    val noDataAvailable = getString(Res.string.data_not_available_text)
+                    it.mapToDailyForecastModelList(timeFormatter, noDataAvailable)
+                }
                 .flowOn(Dispatchers.IO)
                 .collect { dailyForecastModelList ->
                     _state.update { it.copy(mainUiState = MainUiState.Success(dailyForecastModelList = dailyForecastModelList)) }
