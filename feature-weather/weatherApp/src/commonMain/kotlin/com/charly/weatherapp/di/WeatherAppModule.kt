@@ -26,7 +26,7 @@ val weatherAppModule = module {
     }
     single<WeatherUnits> { WeatherConfigurations.weatherUnits }
     single<String>(named(DI_WEATHER_UNITS)) { get<WeatherUnits>().units }
-    factory<TimeZone> { TimeZone.UTC }
+    factory<TimeZone> { WeatherConfigurations.timeZone }
     factory<DateFormatter> { DateFormatter(timeZone = get()) }
     factory<TimeFormatter> { TimeFormatter(timeZone = get()) }
     factory<SpeedFormatter> { SpeedFormatter(weatherUnits = get()) }
