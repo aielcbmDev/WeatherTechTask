@@ -1,4 +1,4 @@
-package com.charly.weatherapp.formatdata
+package com.charly.weatherapp.formatdata.datetime
 
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone

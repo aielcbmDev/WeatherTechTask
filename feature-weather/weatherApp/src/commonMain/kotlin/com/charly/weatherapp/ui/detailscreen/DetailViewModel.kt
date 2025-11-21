@@ -3,8 +3,8 @@ package com.charly.weatherapp.ui.detailscreen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charly.domain.usecases.GetDailyWeatherForecastByIdUseCase
-import com.charly.weatherapp.formatdata.DateFormatter
-import com.charly.weatherapp.formatdata.TimeFormatter
+import com.charly.weatherapp.formatdata.datetime.DateFormatter
+import com.charly.weatherapp.formatdata.datetime.TimeFormatter
 import com.charly.weatherapp.mappers.mapToDailyForecastModel
 import com.charly.weatherapp.model.DailyForecastModel
 import kotlinx.coroutines.CoroutineExceptionHandler

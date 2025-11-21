@@ -1,8 +1,8 @@
 package com.charly.weatherapp.mappers
 
 import com.charly.domain.model.DailyForecast
-import com.charly.weatherapp.formatdata.DateFormatter
-import com.charly.weatherapp.formatdata.TimeFormatter
+import com.charly.weatherapp.formatdata.datetime.DateFormatter
+import com.charly.weatherapp.formatdata.datetime.TimeFormatter
 import com.charly.weatherapp.model.DailyForecastModel
 
 internal fun DailyForecast.mapToDailyForecastModel(

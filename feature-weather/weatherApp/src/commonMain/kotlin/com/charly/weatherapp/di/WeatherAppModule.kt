@@ -3,8 +3,8 @@ package com.charly.weatherapp.di
 import com.charly.core.di.coreModule
 import com.charly.diqualifiers.DI_WEATHER_UNITS
 import com.charly.domain.di.domainModule
-import com.charly.weatherapp.formatdata.DateFormatter
-import com.charly.weatherapp.formatdata.TimeFormatter
+import com.charly.weatherapp.formatdata.datetime.DateFormatter
+import com.charly.weatherapp.formatdata.datetime.TimeFormatter
 import com.charly.weatherapp.model.WeatherUnits
 import com.charly.weatherapp.ui.detailscreen.DetailViewModel
 import com.charly.weatherapp.ui.mainscreen.MainViewModel
