@@ -4,7 +4,7 @@ import com.charly.database.model.DailyForecastEntity
 import com.charly.networking.model.DailyForecastData
 import com.charly.networking.model.DailyForecastWeatherData
 
-private fun DailyForecastData.mapToDailyEntity(): DailyForecastEntity {
+private fun DailyForecastData.mapToDailyForecastEntity(): DailyForecastEntity {
     return DailyForecastEntity(
         dt = dt,
         sunrise = sunrise,
@@ -25,6 +25,6 @@ private fun DailyForecastData.mapToDailyEntity(): DailyForecastEntity {
  * production environment, this mapping would be expanded to include more fields, leading to a more
  * comprehensive data model and, consequently, a more complex database schema.
  */
-internal fun DailyForecastWeatherData.mapToDailyEntityList(): List<DailyForecastEntity> {
-    return this.daily.map { it.mapToDailyEntity() }
+internal fun DailyForecastWeatherData.mapToDailyForecastEntityList(): List<DailyForecastEntity> {
+    return this.daily.map { it.mapToDailyForecastEntity() }
 }
