@@ -1,5 +1,6 @@
 package com.charly.weatherapp.ui.detailscreen
 
+import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charly.domain.usecases.GetDailyWeatherForecastByIdUseCase
@@ -68,10 +69,12 @@ class DetailViewModel(
     }
 }
 
+@Immutable
 data class DetailScreenState(
     val detailUiState: DetailUiState = DetailUiState.Loading
 )
 
+@Immutable
 sealed interface DetailUiState {
     data class Success(
         val dailyForecastModel: DailyForecastModel,

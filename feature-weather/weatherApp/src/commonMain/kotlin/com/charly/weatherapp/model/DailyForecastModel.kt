@@ -1,5 +1,8 @@
 package com.charly.weatherapp.model
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 data class DailyForecastModel(
     val id: Long = 0,
     val dt: String,
