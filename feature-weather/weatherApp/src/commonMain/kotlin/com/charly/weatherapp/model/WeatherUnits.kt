@@ -1,13 +1,23 @@
 package com.charly.weatherapp.model
 
+import com.charly.weatherapp.model.WeatherUnits.IMPERIAL
+import com.charly.weatherapp.model.WeatherUnits.METRIC
+import com.charly.weatherapp.model.WeatherUnits.STANDARD
+
 /**
- * Temperature is available in Fahrenheit, Celsius and Kelvin units.
- * Wind speed is available in miles/hour and meter/sec.
+ * Defines the units of measurement for weather data returned by the API.
+ * This affects values like temperature and wind speed.
  *
- * For temperature in Fahrenheit and wind speed in miles/hour, use units=imperial
- * For temperature in Celsius and wind speed in meter/sec, use units=metric
- * Temperature in Kelvin and wind speed in meter/sec is used by default, so there is no need to use
- * the units parameter in the API call if you want this
+ * The following unit systems are supported:
+ * - [STANDARD]: The default system.
+ *   - Temperature: Kelvin (K)
+ *   - Wind Speed: meter/sec
+ * - [METRIC]:
+ *   - Temperature: Celsius (°C)
+ *   - Wind Speed: meter/sec
+ * - [IMPERIAL]:
+ *   - Temperature: Fahrenheit (°F)
+ *   - Wind Speed: miles/hour
  */
 enum class WeatherUnits(val units: String) {
     STANDARD("standard"),
