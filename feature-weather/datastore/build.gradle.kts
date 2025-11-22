@@ -90,6 +90,8 @@ kotlin {
             implementation(libs.androidx.runner)
             implementation(libs.androidx.core)
             implementation(libs.androidx.testExt.junit)
+            implementation(libs.kotlinx.test)
+            implementation(libs.kotlinx.coroutines.test)
         }
 
         iosMain.dependencies {
