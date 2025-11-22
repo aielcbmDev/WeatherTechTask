@@ -4,9 +4,11 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.longPreferencesKey
+import com.charly.datastore.OpenClassForMocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+@OpenClassForMocking
 class DatastoreDataSource(
     private val dataStore: DataStore<Preferences>
 ) {
