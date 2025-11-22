@@ -2,6 +2,7 @@ package com.charly.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.serialization.Serializable
 
 //  CREATE TABLE daily_weather_table (
 //      id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,6 +19,7 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "daily_weather_table"
 )
+@Serializable
 data class DailyForecastEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
