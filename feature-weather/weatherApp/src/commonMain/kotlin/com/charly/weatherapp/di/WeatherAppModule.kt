@@ -11,6 +11,7 @@ import com.charly.weatherapp.formatdata.degrees.DegreesFormatter
 import com.charly.weatherapp.formatdata.speed.SpeedFormatter
 import com.charly.weatherapp.formatdata.temperature.TemperatureFormatter
 import com.charly.weatherapp.model.WeatherUnits
+import com.charly.weatherapp.provider.StringProvider
 import com.charly.weatherapp.ui.detail.DetailViewModel
 import com.charly.weatherapp.ui.main.MainViewModel
 import kotlinx.datetime.TimeZone
@@ -32,10 +33,12 @@ val weatherAppModule = module {
     factory<SpeedFormatter> { SpeedFormatter(weatherUnits = get()) }
     factory<TemperatureFormatter> { TemperatureFormatter(weatherUnits = get()) }
     factory<DegreesFormatter> { DegreesFormatter() }
+    factory<StringProvider> { StringProvider() }
     viewModel {
         MainViewModel(
             getDailyWeatherForecastListUseCase = get(),
-            dateFormatter = get()
+            dateFormatter = get(),
+            stringProvider = get()
         )
     }
     viewModel {

@@ -1,5 +1,8 @@
 package com.charly.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class DailyForecast(
     val id: Long = 0,
     val dt: Long? = null,

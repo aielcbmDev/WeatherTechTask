@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charly.domain.usecases.GetDailyWeatherForecastListUseCase
 import com.charly.weatherapp.formatdata.datetime.DateFormatter
+import com.charly.weatherapp.provider.StringProvider
 import com.charly.weatherapp.ui.main.mappers.mapToDailyForecastMainModelList
 import com.charly.weatherapp.ui.main.model.DailyForecastMainModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -17,13 +19,14 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.getString
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.data_not_available_text
 
 class MainViewModel(
     private val getDailyWeatherForecastListUseCase: GetDailyWeatherForecastListUseCase,
-    private val dateFormatter: DateFormatter
+    private val dateFormatter: DateFormatter,
+    private val stringProvider: StringProvider,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
@@ -34,7 +37,7 @@ class MainViewModel(
     val state: StateFlow<MainScreenState> = _state.asStateFlow()
 
     init {
-        fetchDailyWeatherForecast()
+        handleIntent(MainViewIntent.FetchDailyWeatherForecast)
     }
 
     fun handleIntent(mainViewIntent: MainViewIntent) {
@@ -48,10 +51,11 @@ class MainViewModel(
         viewModelScope.launch(exceptionHandler) {
             getDailyWeatherForecastListUseCase.execute()
                 .map {
-                    val noDataAvailable = getString(Res.string.data_not_available_text)
+                    val noDataAvailable =
+                        stringProvider.getStringForResource(Res.string.data_not_available_text)
                     it.mapToDailyForecastMainModelList(dateFormatter, noDataAvailable)
                 }
-                .flowOn(Dispatchers.IO)
+                .flowOn(ioDispatcher)
                 .collect { dailyForecastMainModelList ->
                     _state.update {
                         it.copy(mainUiState = MainUiState.Success(dailyForecastMainModelList = dailyForecastMainModelList))

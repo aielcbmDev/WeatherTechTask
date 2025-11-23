@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.androidLint)
     alias(libs.plugins.mokkeryPlugin)
     alias(libs.plugins.kotlinAllOpen)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -83,6 +84,7 @@ kotlin {
 
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.material.icons.extended)
+            implementation(libs.ktor.serialization.kotlinx.json)
         }
 
         commonTest.dependencies {

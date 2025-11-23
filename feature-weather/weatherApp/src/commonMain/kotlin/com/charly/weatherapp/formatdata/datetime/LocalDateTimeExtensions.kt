@@ -16,6 +16,9 @@ fun LocalDateTime.formatToDate(): String {
     return "$day/$month/$year"
 }
 
+/**
+ * Formats a LocalDateTime into "hh:mm:ss" format.
+ */
 fun LocalDateTime.formatToTime(): String {
     val hour = hour.toString().padStart(LENGTH, PAD_CHAR)
     val minute = minute.toString().padStart(LENGTH, PAD_CHAR)
