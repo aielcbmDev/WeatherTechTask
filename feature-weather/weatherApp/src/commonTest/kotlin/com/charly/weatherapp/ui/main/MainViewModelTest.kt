@@ -145,9 +145,7 @@ class MainViewModelTest {
             everySuspend { execute() } throws Exception()
         }
         val dateFormatter = DateFormatter(TimeZone.UTC)
-        val stringProvider = mock<StringProvider> {
-            everySuspend { getStringForResource(Res.string.data_not_available_text) } returns "Not available"
-        }
+        val stringProvider = mock<StringProvider>()
 
         // WHEN
         val mainViewModel = MainViewModel(
