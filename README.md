@@ -53,8 +53,8 @@ the modularization of features:
 - **UI Testing**: Testing the Compose Multiplatform UI is not currently implemented, as the
   configuration requires an androidTarget which the feature modules do not have.
 
-- **Jetpack Compose Previews**: The standard implementation of Compose Previews via debugImplementation(
-  compose.uiTooling) is not possible on a per-module basis.
+- **Jetpack Compose Previews**: The standard implementation of Compose Previews via
+  debugImplementation(compose.uiTooling) is not possible on a per-module basis.
 
 An attempt was made to centralize previews in the composeApp module. While this was partially
 successful, previews that rely on Res.string resources fail to render. Please, have a look at:
@@ -76,11 +76,11 @@ respective modules, leading to significant benefits:
 
 - **Faster Build Times**: Gradle can cache unchanged modules, speeding up the overall build process.
 
-- **Reduced Merge Conflicts**: Teams working in isolated modules are less likely to create conflicting
-  code changes.
+- **Reduced Merge Conflicts**: Teams working in isolated modules are less likely to create
+  conflicting code changes.
 
-- **Improved Modularity**: Each feature is self-contained, making the codebase easier to understand and
-  maintain.
+- **Improved Modularity**: Each feature is self-contained, making the codebase easier to understand
+  and maintain.
 
 - **Simplified Testing**: Isolating features allows for more focused and straightforward unit and
   integration testing.
@@ -169,6 +169,35 @@ The main differences between MVI and MVVM are the following:
    state = reducer(intent, state)
 5. Error Handling → MVI usually models errors explicitly in
 
+### composeAPP
+
+The composeApp module acts as the primary application shell and the integration point for all
+feature modules. While individual features like weatherApp contain their own UI and presentation
+logic, this module is responsible for higher-level application concerns:
+
+- Navigation: It defines the navigation graph, managing how the user moves between different screens
+  and features within the application.
+- Feature Integration: It serves as the place where multiple, otherwise independent, feature modules
+  are brought together to form a cohesive application.
+- Shared Application Logic: It can contain app-wide logic or UI components (like a main toolbar or
+  bottom navigation bar) that are common across all features.
+
+In essence, it is the module that transforms a collection of features into a complete, navigable
+application.
+
+### di-qualifiers
+
+The di-qualifiers module serves a very specific but important purpose: it contains the dependency
+injection qualifiers used throughout the project.
+
+In a Koin-based dependency injection setup, qualifiers are used to distinguish between different
+implementations of the same interface. For example, if you had multiple String providers (like an
+API key and a base URL), you would use qualifiers to tell Koin which one to inject.
+
+By placing these qualifiers in their own dedicated module, they can be easily shared and accessed by
+any other module in the project that needs them, without creating unwanted dependencies or circular
+references. This keeps the DI setup clean, organized, and scalable.
+
 ## Libraries
 
 ### Ktor VS OkHttp
@@ -210,12 +239,12 @@ graph in the common code for both Android and iOS is essential for a true KMP ar
 While the current implementation provides a solid architectural foundation, the following items are
 key priorities for the continued development of this project:
 
-- **UI Theming and Dimensions**: Refine and standardize dimensions, colors, and typography across the
-  application to create a more polished user interface. Sorry for not handling dimensions and
+- **UI Theming and Dimensions**: Refine and standardize dimensions, colors, and typography across
+  the application to create a more polished user interface. Sorry for not handling dimensions and
   theming properly but I prioritized other aspects of this technical task.
-- **Graceful Error Handling**: Improve the user experience during network failures. Instead of showing
-  an error screen, the plan is to continue displaying stale data from the cache while notifying the
-  user with a non-intrusive snackbar that the data may not be up-to-date.
+- **Graceful Error Handling**: Improve the user experience during network failures. Instead of
+  showing an error screen, the plan is to continue displaying stale data from the cache while
+  notifying the user with a non-intrusive snackbar that the data may not be up-to-date.
 - **Pull-to-Refresh**: Implement a pull-to-refresh mechanism to give users manual control over data
   fetching, allowing them to force an update even if the cache is still valid.
 - **Expanded Unit Test Coverage**: Increase test coverage by adding comprehensive unit tests for all
