@@ -38,6 +38,15 @@ To build and run the development version of the iOS app, use the run configurati
 widget
 in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
 
+## Add API keys
+
+To add your own API keys to this project you have to do the following depending on the platform.
+
+- **Android**: Create a file called `secret.properties` and add your API key. Please, have a look a
+  the following [screenshot](./androidApiKeys.png)
+- **iOS**: Create a file called `Secrets.xxconfig` and add your API key. Please, have a look a
+  the following [screenshot](./iOSApiKeys.png)
+
 ## Project Architecture
 
 This document provides a high-level overview of the project's architecture and key design decisions.
