@@ -16,7 +16,9 @@ fun MainScreen(
         is MainUiState.Loading -> ScreenLoading()
         is MainUiState.Success -> MainScreenSuccess(
             dailyForecastMainModelList = uiState.dailyForecastMainModelList,
-            onDailyForecastModelClick = onDailyForecastModelClick
+            isSnackBarVisible = uiState.isSnackBarVisible,
+            onDailyForecastModelClick = onDailyForecastModelClick,
+            onRetryButtonClicked = onRetryButtonClicked
         )
 
         is MainUiState.Error -> ScreenError(onRetryButtonClicked)

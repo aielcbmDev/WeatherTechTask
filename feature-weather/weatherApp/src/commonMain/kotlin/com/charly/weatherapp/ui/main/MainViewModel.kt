@@ -30,7 +30,13 @@ class MainViewModel(
 ) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
-        _state.update { it.copy(mainUiState = MainUiState.Error) }
+        _state.update {
+            if (it.mainUiState is MainUiState.Success) {
+                it.copy(mainUiState = it.mainUiState.copy(isSnackBarVisible = true))
+            } else {
+                it.copy(mainUiState = MainUiState.Error)
+            }
+        }
     }
 
     private val _state = MutableStateFlow(MainScreenState())
@@ -47,7 +53,13 @@ class MainViewModel(
     }
 
     private fun fetchDailyWeatherForecast() {
-        _state.update { it.copy(mainUiState = MainUiState.Loading) }
+        _state.update {
+            if (it.mainUiState is MainUiState.Success) {
+                it
+            } else {
+                it.copy(mainUiState = MainUiState.Loading)
+            }
+        }
         viewModelScope.launch(exceptionHandler) {
             getDailyWeatherForecastListUseCase.execute()
                 .map {
@@ -74,6 +86,7 @@ data class MainScreenState(
 sealed interface MainUiState {
     data class Success(
         val dailyForecastMainModelList: List<DailyForecastMainModel>,
+        val isSnackBarVisible: Boolean = false
     ) : MainUiState
 
     object Loading : MainUiState

@@ -10,10 +10,14 @@ import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 @Composable
 fun MainScreenSuccessPreview(
     @PreviewParameter(DailyForecastMainModelListParameterProvider::class) dailyForecastMainModelList: List<DailyForecastMainModel>,
-    onDailyForecastModelClick: (Long) -> Unit = {}
+    isSnackBarVisible: Boolean = false,
+    onDailyForecastModelClick: (Long) -> Unit = {},
+    onRetryButtonClicked: () -> Unit = {}
 ) {
     MainScreenSuccess(
         dailyForecastMainModelList = dailyForecastMainModelList,
-        onDailyForecastModelClick = onDailyForecastModelClick
+        isSnackBarVisible = isSnackBarVisible,
+        onDailyForecastModelClick = onDailyForecastModelClick,
+        onRetryButtonClicked = onRetryButtonClicked
     )
 }

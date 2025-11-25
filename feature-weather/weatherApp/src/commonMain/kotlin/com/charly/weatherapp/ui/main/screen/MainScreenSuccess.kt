@@ -12,25 +12,42 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.charly.weatherapp.ui.main.model.DailyForecastMainModel
+import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
+import volkswagentechtask.feature_weather.weatherapp.generated.resources.main_screen_snack_bar_action_label
+import volkswagentechtask.feature_weather.weatherapp.generated.resources.main_screen_snack_bar_message
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.main_screen_top_app_bar_title
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreenSuccess(
     dailyForecastMainModelList: List<DailyForecastMainModel>,
+    isSnackBarVisible: Boolean,
     onDailyForecastModelClick: (Long) -> Unit,
+    onRetryButtonClicked: () -> Unit
 ) {
+    val scope = rememberCoroutineScope()
+    val snackBarHostState = remember { SnackbarHostState() }
     Scaffold(
+        snackbarHost = {
+            SnackbarHost(hostState = snackBarHostState)
+        },
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(Res.string.main_screen_top_app_bar_title)) },
@@ -52,6 +69,23 @@ fun MainScreenSuccess(
                     dailyForecastMainModel = dailyForecastMainModel,
                     onDailyForecastModelClick = onDailyForecastModelClick
                 )
+            }
+        }
+        if (isSnackBarVisible) {
+            scope.launch {
+                val result = snackBarHostState
+                    .showSnackbar(
+                        message = getString(Res.string.main_screen_snack_bar_message),
+                        actionLabel = getString(Res.string.main_screen_snack_bar_action_label),
+                        duration = SnackbarDuration.Indefinite
+                    )
+                when (result) {
+                    SnackbarResult.ActionPerformed -> {
+                        onRetryButtonClicked.invoke()
+                    }
+
+                    SnackbarResult.Dismissed -> {}
+                }
             }
         }
     }
