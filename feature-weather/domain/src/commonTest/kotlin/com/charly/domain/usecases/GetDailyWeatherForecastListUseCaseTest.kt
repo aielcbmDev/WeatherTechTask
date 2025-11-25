@@ -22,8 +22,9 @@ class GetDailyWeatherForecastListUseCaseTest {
     fun `Verify that fetching a list of daily forecast from the database succeed`() = runTest {
         // GIVEN
         val dailyForecastList = listOf<DailyForecast>()
+        val invalidateCache = false
         val getDailyWeatherForecastListRepository = mock<GetDailyWeatherForecastListRepository> {
-            everySuspend { execute() } returns flowOf(dailyForecastList)
+            everySuspend { execute(invalidateCache) } returns flowOf(dailyForecastList)
         }
         val getDailyWeatherForecastListUseCase =
             GetDailyWeatherForecastListUseCase(getDailyWeatherForecastListRepository)
@@ -33,7 +34,7 @@ class GetDailyWeatherForecastListUseCaseTest {
         assertSame(dailyForecastList, result)
         verifySuspend(mode = VerifyMode.exhaustiveOrder) {
             @Suppress("UnusedFlow")
-            getDailyWeatherForecastListRepository.execute()
+            getDailyWeatherForecastListRepository.execute(invalidateCache)
         }
 
     }
@@ -41,8 +42,9 @@ class GetDailyWeatherForecastListUseCaseTest {
     @Test
     fun `Verify that fetching a list of daily forecast from the database fails`() = runTest {
         // GIVEN
+        val invalidateCache = false
         val getDailyWeatherForecastListRepository = mock<GetDailyWeatherForecastListRepository> {
-            everySuspend { execute() } throws Exception()
+            everySuspend { execute(invalidateCache) } throws Exception()
         }
         val getDailyWeatherForecastListUseCase =
             GetDailyWeatherForecastListUseCase(getDailyWeatherForecastListRepository)
@@ -56,7 +58,7 @@ class GetDailyWeatherForecastListUseCaseTest {
         assertIs<Exception>(actualException)
         verifySuspend(mode = VerifyMode.exhaustiveOrder) {
             @Suppress("UnusedFlow")
-            getDailyWeatherForecastListRepository.execute()
+            getDailyWeatherForecastListRepository.execute(invalidateCache)
         }
     }
 }

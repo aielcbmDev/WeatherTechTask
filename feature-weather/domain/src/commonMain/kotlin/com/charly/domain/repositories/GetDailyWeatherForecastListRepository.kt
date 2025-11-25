@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 fun interface GetDailyWeatherForecastListRepository {
 
-    suspend fun execute(): Flow<List<DailyForecast>>
+    suspend fun execute(invalidateCache: Boolean): Flow<List<DailyForecast>>
 }

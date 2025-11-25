@@ -46,7 +46,7 @@ class GetDailyWeatherForecastListRepositoryImplTest {
         )
 
         // WHEN
-        val result = getDailyWeatherForecastListRepository.execute().toList().first()
+        val result = getDailyWeatherForecastListRepository.execute(false).toList().first()
 
         // THEN
         val expectedResult = dailyForecastEntityList.mapToDailyForecastList()
@@ -87,7 +87,7 @@ class GetDailyWeatherForecastListRepositoryImplTest {
             )
 
             // WHEN
-            val result = getDailyWeatherForecastListRepository.execute().toList().first()
+            val result = getDailyWeatherForecastListRepository.execute(false).toList().first()
 
             // THEN
             val expectedResult = dailyForecastEntityList.mapToDailyForecastList()

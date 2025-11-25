@@ -17,22 +17,39 @@ class GetDailyWeatherForecastListRepositoryImpl(
     private val weatherNetworkDataSource: WeatherNetworkingDataSource
 ) : GetDailyWeatherForecastListRepository {
 
-    override suspend fun execute(): Flow<List<DailyForecast>> {
+    private var isCacheInvalid = false
+
+    override suspend fun execute(invalidateCache: Boolean): Flow<List<DailyForecast>> {
+        if (invalidateCache) {
+            this.isCacheInvalid = true
+        }
         return weatherDatabaseDataSource.getDailyWeatherForecastList()
             .map { it.mapToDailyForecastList() }
             .transform {
-                emit(it)
+                if (it.isNotEmpty()) {
+                    emit(it)
+                }
                 fetchAndSaveDailyWeatherForecast()
             }
     }
 
     private suspend fun fetchAndSaveDailyWeatherForecast() {
-        if (timerCache.isCacheExpired()) {
-            val dailyWeatherForecastData = weatherNetworkDataSource.getDailyWeatherForecastData()
-            timerCache.saveCacheTime()
-            weatherDatabaseDataSource.deleteDailyWeatherForecastTable()
-            val dailyEntityList = dailyWeatherForecastData.mapToDailyForecastEntityList()
-            weatherDatabaseDataSource.insertDailyWeatherForecastList(dailyEntityList)
+        if (isCacheInvalid || timerCache.isCacheExpired()) {
+            val needsInvalidation = isCacheInvalid
+            try {
+                val dailyWeatherForecastData =
+                    weatherNetworkDataSource.getDailyWeatherForecastData()
+                timerCache.saveCacheTime()
+                weatherDatabaseDataSource.deleteDailyWeatherForecastTable()
+                val dailyEntityList = dailyWeatherForecastData.mapToDailyForecastEntityList()
+                weatherDatabaseDataSource.insertDailyWeatherForecastList(dailyEntityList)
+                isCacheInvalid = false
+            } catch (e: Exception) {
+                if (needsInvalidation) {
+                    isCacheInvalid = false
+                }
+                throw e
+            }
         }
     }
 }

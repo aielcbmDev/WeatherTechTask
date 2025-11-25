@@ -10,7 +10,7 @@ class GetDailyWeatherForecastListUseCase(
     private val getDailyWeatherForecastListRepository: GetDailyWeatherForecastListRepository
 ) {
 
-    suspend fun execute(): Flow<List<DailyForecast>> {
-        return getDailyWeatherForecastListRepository.execute()
+    suspend fun execute(invalidateCache: Boolean = false): Flow<List<DailyForecast>> {
+        return getDailyWeatherForecastListRepository.execute(invalidateCache)
     }
 }

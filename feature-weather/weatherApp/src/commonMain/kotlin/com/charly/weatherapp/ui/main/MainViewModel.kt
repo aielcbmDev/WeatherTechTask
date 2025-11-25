@@ -32,7 +32,12 @@ class MainViewModel(
     private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
         _state.update {
             if (it.mainUiState is MainUiState.Success) {
-                it.copy(mainUiState = it.mainUiState.copy(isSnackBarVisible = true))
+                it.copy(
+                    mainUiState = it.mainUiState.copy(
+                        isSnackBarVisible = true,
+                        isRefreshing = false
+                    )
+                )
             } else {
                 it.copy(mainUiState = MainUiState.Error)
             }
@@ -43,25 +48,25 @@ class MainViewModel(
     val state: StateFlow<MainScreenState> = _state.asStateFlow()
 
     init {
-        handleIntent(MainViewIntent.FetchDailyWeatherForecast)
+        handleIntent(MainViewIntent.FetchDailyWeatherForecast(false))
     }
 
     fun handleIntent(mainViewIntent: MainViewIntent) {
         when (mainViewIntent) {
-            is MainViewIntent.FetchDailyWeatherForecast -> fetchDailyWeatherForecast()
+            is MainViewIntent.FetchDailyWeatherForecast -> fetchDailyWeatherForecast(mainViewIntent.invalidateCache)
         }
     }
 
-    private fun fetchDailyWeatherForecast() {
+    private fun fetchDailyWeatherForecast(invalidateCache: Boolean) {
         _state.update {
             if (it.mainUiState is MainUiState.Success) {
-                it
+                it.copy(mainUiState = it.mainUiState.copy(isRefreshing = true))
             } else {
                 it.copy(mainUiState = MainUiState.Loading)
             }
         }
         viewModelScope.launch(exceptionHandler) {
-            getDailyWeatherForecastListUseCase.execute()
+            getDailyWeatherForecastListUseCase.execute(invalidateCache)
                 .map {
                     val noDataAvailable =
                         stringProvider.getStringForResource(Res.string.data_not_available_text)
@@ -86,7 +91,8 @@ data class MainScreenState(
 sealed interface MainUiState {
     data class Success(
         val dailyForecastMainModelList: List<DailyForecastMainModel>,
-        val isSnackBarVisible: Boolean = false
+        val isSnackBarVisible: Boolean = false,
+        val isRefreshing: Boolean = false
     ) : MainUiState
 
     object Loading : MainUiState
@@ -94,5 +100,5 @@ sealed interface MainUiState {
 }
 
 sealed interface MainViewIntent {
-    object FetchDailyWeatherForecast : MainViewIntent
+    data class FetchDailyWeatherForecast(val invalidateCache: Boolean) : MainViewIntent
 }

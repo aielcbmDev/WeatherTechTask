@@ -31,7 +31,9 @@ fun WeatherNavigationHost() {
                 onDailyForecastModelClick = { id ->
                     navController.navigate(Destination.Detail(id).route)
                 },
-                onRetryButtonClicked = { mainViewModel.handleIntent(MainViewIntent.FetchDailyWeatherForecast) }
+                onRetryButtonClicked = {
+                    mainViewModel.handleIntent(MainViewIntent.FetchDailyWeatherForecast(true))
+                }
             )
         }
         composable(

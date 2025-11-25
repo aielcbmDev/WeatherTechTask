@@ -19,6 +19,7 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -39,6 +40,7 @@ import volkswagentechtask.feature_weather.weatherapp.generated.resources.main_sc
 fun MainScreenSuccess(
     dailyForecastMainModelList: List<DailyForecastMainModel>,
     isSnackBarVisible: Boolean,
+    isRefreshing: Boolean,
     onDailyForecastModelClick: (Long) -> Unit,
     onRetryButtonClicked: () -> Unit
 ) {
@@ -56,19 +58,24 @@ fun MainScreenSuccess(
         },
         modifier = Modifier.fillMaxSize()
     ) { padding ->
-        val state = rememberLazyListState()
-        LazyColumn(
-            state = state,
-            modifier = Modifier.padding(padding)
+        PullToRefreshBox(
+            isRefreshing = isRefreshing,
+            onRefresh = { onRetryButtonClicked.invoke() }
         ) {
-            items(
-                items = dailyForecastMainModelList,
-                key = { item -> item.id }
-            ) { dailyForecastMainModel ->
-                DailyItem(
-                    dailyForecastMainModel = dailyForecastMainModel,
-                    onDailyForecastModelClick = onDailyForecastModelClick
-                )
+            val state = rememberLazyListState()
+            LazyColumn(
+                state = state,
+                modifier = Modifier.padding(padding)
+            ) {
+                items(
+                    items = dailyForecastMainModelList,
+                    key = { item -> item.id }
+                ) { dailyForecastMainModel ->
+                    DailyItem(
+                        dailyForecastMainModel = dailyForecastMainModel,
+                        onDailyForecastModelClick = onDailyForecastModelClick
+                    )
+                }
             }
         }
         if (isSnackBarVisible) {
