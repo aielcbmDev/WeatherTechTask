@@ -8,8 +8,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.charly.uitheme.Dimensions
+import com.charly.uitheme.TypographySize
 
 @Composable
 fun DisplayDataVertically(
@@ -21,15 +21,15 @@ fun DisplayDataVertically(
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .padding(horizontal = Dimensions.medium, vertical = Dimensions.small)
     ) {
         Text(
             text = title,
-            fontSize = 22.sp
+            fontSize = TypographySize.title
         )
         Text(
             text = data,
-            fontSize = 22.sp
+            fontSize = TypographySize.body
         )
     }
 }

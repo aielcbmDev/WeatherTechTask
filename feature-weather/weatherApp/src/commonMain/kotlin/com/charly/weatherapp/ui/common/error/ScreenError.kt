@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
+import com.charly.uitheme.TypographySize
 import org.jetbrains.compose.resources.stringResource
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.any_error
@@ -28,13 +28,13 @@ fun ScreenError(
     ) {
         Text(
             text = stringResource(Res.string.any_error),
-            fontSize = 22.sp,
+            fontSize = TypographySize.title,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center
         )
         Text(
             text = stringResource(Res.string.error_fix_suggestion),
-            fontSize = 22.sp,
+            fontSize = TypographySize.title,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center
         )
@@ -45,7 +45,7 @@ fun ScreenError(
         ) {
             Text(
                 text = stringResource(Res.string.retry_button_text),
-                fontSize = 14.sp
+                fontSize = TypographySize.body
             )
         }
     }

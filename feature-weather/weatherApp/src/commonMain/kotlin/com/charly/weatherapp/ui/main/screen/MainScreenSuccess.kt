@@ -26,7 +26,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import com.charly.uitheme.Dimensions
+import com.charly.uitheme.TypographySize
 import com.charly.weatherapp.ui.main.model.DailyForecastMainModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -142,19 +143,21 @@ private fun DailyItem(
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp)
+                .padding(horizontal = Dimensions.large)
         ) {
             Text(
                 text = dailyForecastMainModel.dt,
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.outline,
-                modifier = modifier.padding(top = 12.dp, bottom = 8.dp),
+                fontSize = TypographySize.title,
+                modifier = modifier.padding(top = Dimensions.medium, bottom = Dimensions.small),
             )
 
             Text(
                 text = dailyForecastMainModel.summary,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontSize = TypographySize.body
             )
         }
     }
