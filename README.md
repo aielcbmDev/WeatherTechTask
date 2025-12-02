@@ -68,7 +68,7 @@ the modularization of features:
   configuration requires an androidTarget which the feature modules do not have.
 
 - **Jetpack Compose Previews**: The standard implementation of Compose Previews via
-  debugImplementation(compose.uiTooling) is not possible on a per-module basis.
+  debugImplementation(libs.compose.ui.tooling) is not possible on a per-module basis.
 
 An attempt was made to centralize previews in the composeApp module. While this was partially
 successful, previews that rely on Res.string resources fail to render. Please, have a look at:

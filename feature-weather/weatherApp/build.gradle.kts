@@ -1,5 +1,4 @@
 import dev.mokkery.gradle.mokkery
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.include
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -73,12 +72,12 @@ kotlin {
             implementation(project(":feature-weather:core"))
             implementation(project(":di-qualifiers"))
             implementation(project(":ui-theme"))
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
+            implementation(libs.compose.runtime)
+            implementation(libs.compose.foundation)
+            implementation(libs.compose.material3)
+            implementation(libs.compose.ui)
+            implementation(libs.compose.components.resources)
+            implementation(libs.compose.ui.tooling.preview)
 
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.compose)

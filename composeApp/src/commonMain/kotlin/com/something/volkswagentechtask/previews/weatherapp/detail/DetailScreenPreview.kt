@@ -1,10 +1,10 @@
 package com.something.volkswagentechtask.previews.weatherapp.detail
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.charly.weatherapp.ui.detail.DetailScreenState
 import com.charly.weatherapp.ui.detail.screen.DetailScreen
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.ui.tooling.preview.PreviewParameter
 
 @Preview
 @Composable

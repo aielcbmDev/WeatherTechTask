@@ -1,7 +1,7 @@
 package com.something.volkswagentechtask.previews.weatherapp.main.success
 
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.charly.weatherapp.ui.main.model.DailyForecastMainModel
-import org.jetbrains.compose.ui.tooling.preview.PreviewParameterProvider
 
 class DailyForecastMainModelListParameterProvider :
     PreviewParameterProvider<List<DailyForecastMainModel>> {

@@ -1,9 +1,9 @@
 package com.something.volkswagentechtask.previews.weatherapp.main
 
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.charly.weatherapp.ui.main.MainScreenState
 import com.charly.weatherapp.ui.main.MainUiState
 import com.charly.weatherapp.ui.main.model.DailyForecastMainModel
-import org.jetbrains.compose.ui.tooling.preview.PreviewParameterProvider
 
 class MainScreenParameterProvider : PreviewParameterProvider<MainScreenState> {
 
