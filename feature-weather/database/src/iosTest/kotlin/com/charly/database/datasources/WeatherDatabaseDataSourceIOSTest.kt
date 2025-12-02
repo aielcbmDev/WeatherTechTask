@@ -81,4 +81,23 @@ class WeatherDatabaseDataSourceIOSTest {
         assertTrue(result.isEmpty())
         weatherDatabase.close()
     }
+
+    @Test
+    fun verify_that_delete_and_insert_the_daily_weather_forecast_table_succeeds() = runTest {
+        // GIVEN
+        val weatherDatabase =
+            Room.inMemoryDatabaseBuilder<WeatherDatabase>().setDriver(BundledSQLiteDriver()).build()
+        val dailyForecastDao = weatherDatabase.getDailyDao()
+        val dailyForecastEntityList =
+            Json.decodeFromString<List<DailyForecastEntity>>(DAILY_WEATHER_FORECAST_LIST)
+        dailyForecastDao.insertOrReplaceListOfDailyWeatherForecast(dailyForecastEntityList)
+
+        // WHEN
+        dailyForecastDao.deleteAndInsertListOfDailyWeatherForecast(dailyForecastEntityList)
+        val result = dailyForecastDao.getDailyWeatherForecastList().first()
+
+        // THEN
+        assertContentEquals(dailyForecastEntityList, result)
+        weatherDatabase.close()
+    }
 }

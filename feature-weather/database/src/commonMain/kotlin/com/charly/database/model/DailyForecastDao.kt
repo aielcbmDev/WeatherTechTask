@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -20,4 +21,10 @@ interface DailyForecastDao {
 
     @Query("DELETE from daily_weather_table")
     suspend fun deleteDailyWeatherForecastTable()
+
+    @Transaction
+    suspend fun deleteAndInsertListOfDailyWeatherForecast(dailyForecastEntityList: List<DailyForecastEntity>) {
+        deleteDailyWeatherForecastTable()
+        insertOrReplaceListOfDailyWeatherForecast(dailyForecastEntityList)
+    }
 }

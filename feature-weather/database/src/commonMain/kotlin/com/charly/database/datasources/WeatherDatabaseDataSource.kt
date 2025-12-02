@@ -25,4 +25,8 @@ class WeatherDatabaseDataSource(
     suspend fun deleteDailyWeatherForecastTable() {
         dailyForecastDao.deleteDailyWeatherForecastTable()
     }
+
+    suspend fun deleteAndInsertListOfDailyWeatherForecast(dailyForecastEntityList: List<DailyForecastEntity>) {
+        dailyForecastDao.deleteAndInsertListOfDailyWeatherForecast(dailyForecastEntityList)
+    }
 }

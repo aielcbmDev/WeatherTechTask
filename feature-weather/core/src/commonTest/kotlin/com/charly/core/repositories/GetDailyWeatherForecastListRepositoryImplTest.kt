@@ -76,8 +76,7 @@ class GetDailyWeatherForecastListRepositoryImplTest {
                 everySuspend { getDailyWeatherForecastList() } returns flowOf(
                     dailyForecastEntityList
                 )
-                everySuspend { deleteDailyWeatherForecastTable() } returns Unit
-                everySuspend { insertDailyWeatherForecastList(dailyForecastWeatherData.mapToDailyForecastEntityList()) } returns Unit
+                everySuspend { deleteAndInsertListOfDailyWeatherForecast(dailyForecastWeatherData.mapToDailyForecastEntityList()) } returns Unit
             }
             val weatherNetworkDataSource = mock<WeatherNetworkingDataSource> {
                 everySuspend { getDailyWeatherForecastData() } returns dailyForecastWeatherData
@@ -99,9 +98,10 @@ class GetDailyWeatherForecastListRepositoryImplTest {
                 @Suppress("UnusedFlow")
                 weatherDatabaseDataSource.getDailyWeatherForecastList()
                 weatherNetworkDataSource.getDailyWeatherForecastData()
+                weatherDatabaseDataSource.deleteAndInsertListOfDailyWeatherForecast(
+                    dailyForecastWeatherData.mapToDailyForecastEntityList()
+                )
                 timerCache.saveCacheTime()
-                weatherDatabaseDataSource.deleteDailyWeatherForecastTable()
-                weatherDatabaseDataSource.insertDailyWeatherForecastList(dailyForecastWeatherData.mapToDailyForecastEntityList())
             }
         }
 
@@ -122,8 +122,7 @@ class GetDailyWeatherForecastListRepositoryImplTest {
                 everySuspend { getDailyWeatherForecastList() } returns flowOf(
                     dailyForecastEntityList
                 )
-                everySuspend { deleteDailyWeatherForecastTable() } returns Unit
-                everySuspend { insertDailyWeatherForecastList(dailyForecastWeatherData.mapToDailyForecastEntityList()) } returns Unit
+                everySuspend { deleteAndInsertListOfDailyWeatherForecast(dailyForecastWeatherData.mapToDailyForecastEntityList()) } returns Unit
             }
             val weatherNetworkDataSource = mock<WeatherNetworkingDataSource> {
                 everySuspend { getDailyWeatherForecastData() } returns dailyForecastWeatherData
@@ -146,9 +145,10 @@ class GetDailyWeatherForecastListRepositoryImplTest {
                 weatherDatabaseDataSource.getDailyWeatherForecastList()
                 timerCache.isCacheExpired()
                 weatherNetworkDataSource.getDailyWeatherForecastData()
+                weatherDatabaseDataSource.deleteAndInsertListOfDailyWeatherForecast(
+                    dailyForecastWeatherData.mapToDailyForecastEntityList()
+                )
                 timerCache.saveCacheTime()
-                weatherDatabaseDataSource.deleteDailyWeatherForecastTable()
-                weatherDatabaseDataSource.insertDailyWeatherForecastList(dailyForecastWeatherData.mapToDailyForecastEntityList())
             }
         }
 }
