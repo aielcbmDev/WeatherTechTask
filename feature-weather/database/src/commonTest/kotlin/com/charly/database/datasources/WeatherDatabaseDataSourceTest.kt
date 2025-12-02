@@ -66,42 +66,6 @@ class WeatherDatabaseDataSourceTest {
     }
 
     @Test
-    fun `Verify that inserting a list of daily weather forecast succeeds`() = runTest {
-        // GIVEN
-        val dailyForecastEntityList =
-            Json.decodeFromString<List<DailyForecastEntity>>(DAILY_WEATHER_FORECAST_LIST)
-        val dailyForecastDao = mock<DailyForecastDao> {
-            everySuspend { insertOrReplaceListOfDailyWeatherForecast(dailyForecastEntityList) } returns Unit
-        }
-        val weatherDatabaseDataSource = WeatherDatabaseDataSource(dailyForecastDao)
-
-        // WHEN
-        weatherDatabaseDataSource.insertDailyWeatherForecastList(dailyForecastEntityList)
-
-        // THEN
-        verifySuspend(mode = VerifyMode.exhaustiveOrder) {
-            dailyForecastDao.insertOrReplaceListOfDailyWeatherForecast(dailyForecastEntityList)
-        }
-    }
-
-    @Test
-    fun `Verify that deleting the daily weather forecast table succeeds`() = runTest {
-        // GIVEN
-        val dailyForecastDao = mock<DailyForecastDao> {
-            everySuspend { deleteDailyWeatherForecastTable() } returns Unit
-        }
-        val weatherDatabaseDataSource = WeatherDatabaseDataSource(dailyForecastDao)
-
-        // WHEN
-        weatherDatabaseDataSource.deleteDailyWeatherForecastTable()
-
-        // THEN
-        verifySuspend(mode = VerifyMode.exhaustiveOrder) {
-            dailyForecastDao.deleteDailyWeatherForecastTable()
-        }
-    }
-
-    @Test
     fun `Verify that delete and insert the daily weather forecast table succeeds`() = runTest {
         // GIVEN
         val dailyForecastEntityList =
