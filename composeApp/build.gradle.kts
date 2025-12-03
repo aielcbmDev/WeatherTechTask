@@ -52,7 +52,8 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
 
-            implementation(libs.kotlinx.compose.navigation)
+            implementation(libs.androidx.nav3.ui)
+            implementation(libs.androidx.lifecycle.viewmodel.nav3)
         }
         commonTest.dependencies {
             implementation(libs.kotlinx.test)

@@ -4,7 +4,7 @@ android-compileSdk = "36"
 android-minSdk = "24"
 android-targetSdk = "36"
 androidx-activity = "1.12.0"                    # https://developer.android.com/jetpack/androidx/releases/activity
-androidx-lifecycle = "2.9.6"
+androidx-lifecycle = "2.10.0-alpha06"
 androidx-testExt = "1.3.0"
 composeMultiplatform = "1.10.0-rc01"            # https://github.com/JetBrains/compose-multiplatform/releases
 material3 = "1.9.0"
@@ -13,7 +13,6 @@ runner = "1.7.0"
 core = "1.7.0"
 ktor = "3.3.3"                                  # https://ktor.io/changelog/
 koinBom = "4.1.1"                               # https://github.com/InsertKoinIO/koin/releases
-androidx-compose-navigation = "2.9.1"           # https://mvnrepository.com/artifact/org.jetbrains.androidx.navigation/navigation-compose
 kotlin-serialization-json = "1.9.0"             # https://github.com/Kotlin/kotlinx.serialization/releases
 mokkeryVersion = "3.0.0"                        # https://github.com/lupuuss/Mokkery/releases
 kotlinxCoroutines = "1.10.2"                    # https://github.com/Kotlin/kotlinx.coroutines/releases
@@ -25,6 +24,7 @@ sqlite-bundled = "2.6.2"                        # https://developer.android.com/
 datastore = "1.2.0"                             # https://developer.android.com/jetpack/androidx/releases/datastore
 kotlinDateTime = "0.7.1"                        # https://github.com/Kotlin/kotlinx-datetime/releases
 materialIcons = "1.7.3"                         # https://mvnrepository.com/artifact/org.jetbrains.compose.material/material-icons-extended
+androidx-nav3 = "1.0.0-alpha06"
 
 [libraries]
 compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
@@ -42,6 +42,8 @@ androidx-testExt-junit = { module = "androidx.test.ext:junit", version.ref = "an
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-lifecycle-viewmodelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-nav3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "androidx-lifecycle" }
+androidx-nav3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "androidx-nav3" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 androidx-runner = { module = "androidx.test:runner", version.ref = "runner" }
 androidx-core = { module = "androidx.test:core", version.ref = "core" }
@@ -57,7 +59,6 @@ koin-core = { module = "io.insert-koin:koin-core" }
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-compose = { module = "io.insert-koin:koin-compose" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" }
-kotlinx-compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-compose-navigation" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
