@@ -23,7 +23,7 @@ fun AppNavigationHost() {
             rememberViewModelStoreNavEntryDecorator()
         ),
         entryProvider = entryProvider {
-            AddWeatherFeatureEntries(this, backStack)
+            AddWeatherFeatureEntries(backStack)
         }
     )
 }

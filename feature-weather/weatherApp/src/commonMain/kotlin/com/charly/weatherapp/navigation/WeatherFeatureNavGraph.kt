@@ -17,11 +17,10 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun AddWeatherFeatureEntries(
-    scope: EntryProviderScope<ScreenKey>,
+fun EntryProviderScope<ScreenKey>.AddWeatherFeatureEntries(
     backStack: MutableList<ScreenKey>
 ) {
-    scope.entry<MainScreenKey> {
+    entry<MainScreenKey> {
         val mainViewModel = koinViewModel<MainViewModel>()
         val mainScreenState by mainViewModel.state.collectAsStateWithLifecycle()
         MainScreen(
@@ -34,7 +33,7 @@ fun AddWeatherFeatureEntries(
             }
         )
     }
-    scope.entry<DetailScreenKey> { detailScreen ->
+    entry<DetailScreenKey> { detailScreen ->
         val detailViewModel = koinViewModel<DetailViewModel>(
             parameters = { parametersOf(detailScreen.id) }
         )
