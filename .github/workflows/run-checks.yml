@@ -1,7 +1,7 @@
 # .github/workflows/run-checks.yml
 
 # Name of the workflow, which will be displayed in the "Actions" tab on GitHub
-name: Run Checks
+name: CI Checks
 
 # ---
 # This section defines when the workflow will automatically run.
@@ -18,7 +18,7 @@ on:
 # This section defines the jobs to be executed.
 # ---
 jobs:
-  # We have a single job named "build-and-test"
+  # Job 1: Job for running tests
   build-and-test:
     # ---
     # The runner environment.
@@ -57,3 +57,43 @@ jobs:
       # verification tasks, including tests, for ALL targets (JVM, Android, iOS, etc.).
       - name: Run all checks with Gradle
         run: ./gradlew check
+
+  # Job 2: Job to run assembleDebug
+  assemble-debug:
+    runs-on: macos-latest # Use the same runner
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Run assembleDebug with Gradle
+        run: ./gradlew assembleDebug
+
+  # Job 3: Job to run lint
+  lint:
+    runs-on: macos-latest # Use the same runner
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Run lint with Gradle
+        run: ./gradlew lint
