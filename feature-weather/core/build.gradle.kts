@@ -10,7 +10,14 @@ plugins {
 }
 
 kotlin {
-
+    compilerOptions {
+        // Removes the following warning when executing unit tests:
+        //
+        // 'expect'/'actual' classes (including interfaces, objects, annotations, enums,
+        // and 'actual' typealiases) are in Beta. Consider using the '-Xexpect-actual-classes'
+        // flag to suppress this warning.
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
     // Target declarations - add or remove as needed below. These define
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
@@ -108,7 +115,7 @@ kotlin {
 // this check might require adjustment depending on your project type and the tasks that you use
 // `endsWith("Test")` works with "*Test" tasks from Multiplatform projects, but it does not include
 // tasks like `check`
-fun isTestingTask(name: String) = name.endsWith("Test")
+fun isTestingTask(name: String) = name.endsWith("Test") || name.endsWith("check")
 
 val isTesting = gradle
     .startParameter

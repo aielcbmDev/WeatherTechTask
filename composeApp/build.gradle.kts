@@ -11,6 +11,14 @@ plugins {
 }
 
 kotlin {
+    compilerOptions {
+        // Removes the following warning when executing unit tests:
+        //
+        // 'expect'/'actual' classes (including interfaces, objects, annotations, enums,
+        // and 'actual' typealiases) are in Beta. Consider using the '-Xexpect-actual-classes'
+        // flag to suppress this warning.
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
     androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
