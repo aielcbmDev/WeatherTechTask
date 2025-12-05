@@ -22,6 +22,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -113,16 +114,18 @@ private fun DisplaySnackBar(
     onRetryButtonClicked: () -> Unit
 ) {
     if (isSnackBarVisible) {
-        coroutineScope.launch {
-            val result = snackBarHostState
-                .showSnackbar(
-                    message = getString(Res.string.main_screen_snack_bar_message),
-                    actionLabel = getString(Res.string.main_screen_snack_bar_action_label),
-                    duration = SnackbarDuration.Indefinite
-                )
-            when (result) {
-                SnackbarResult.ActionPerformed -> onRetryButtonClicked.invoke()
-                else -> {}
+        LaunchedEffect("") {
+            coroutineScope.launch {
+                val result = snackBarHostState
+                    .showSnackbar(
+                        message = getString(Res.string.main_screen_snack_bar_message),
+                        actionLabel = getString(Res.string.main_screen_snack_bar_action_label),
+                        duration = SnackbarDuration.Indefinite
+                    )
+                when (result) {
+                    SnackbarResult.ActionPerformed -> onRetryButtonClicked.invoke()
+                    else -> {}
+                }
             }
         }
     }
