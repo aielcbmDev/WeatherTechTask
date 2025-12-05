@@ -1,4 +1,4 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+This is a Kotlin Multiplatform project targeting Android and iOS.
 
 * [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform
   applications.
@@ -8,13 +8,10 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
       folder name.
       For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
       the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-      Similarly, if you want to edit the Desktop (JVM) specific part,
-      the [jvmMain](./composeApp/src/jvmMain/kotlin)
-      folder is the appropriate location.
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose
-  Multiplatform, you need this entry point for your iOS app. This is also where you should add
-  SwiftUI code for your project.
+* [/iosApp](./iosApp/iosApp) contains the iOS application. Even if you’re sharing your UI with
+  Compose Multiplatform, you need this entry point for your iOS app. This is also where you should
+  add any SwiftUI code for your project.
 
 ## Build and Run Android Application
 
@@ -38,18 +35,18 @@ there.
 
 ## Add API keys
 
-To add your own API keys to this project you have to do the following depending on the platform.
+To add your own API keys to this project, you have to do the following depending on the platform.
 
 **Android**
 
 1. Create a file named `secret.properties` in the root folder of the project.
-2. Inside this file, define the key as a property -> WEATHER_API_KEY="YOUR_API_KEY_HERE"
+2. Inside this file, define the key as a property -> `WEATHER_API_KEY="YOUR_API_KEY_HERE"`
 3. A visual guide can be found [here](./androidApiKeys.png).
 
 **iOS**
 
 1. Create a file named `Secrets.xcconfig` in [this](./iosApp/Configuration) folder.
-2. Inside this file, define the key as a property -> WEATHER_API_KEY="YOUR_API_KEY_HERE"
+2. Inside this file, define the key as a property -> `WEATHER_API_KEY="YOUR_API_KEY_HERE"`
 3. A visual guide can be found [here](./iOSApiKeys.png).
 
 ## Project Architecture
@@ -65,40 +62,49 @@ It is important to note two specific trade-offs resulting from the multiplatform
 the modularization of features:
 
 - **UI Testing**: Testing the Compose Multiplatform UI is not currently implemented, as the
-  configuration requires an androidTarget which the feature modules do not have.
+  configuration requires an `androidTarget` which the feature modules do not have.
 
 - **Jetpack Compose Previews**: The standard implementation of Compose Previews via
-  debugImplementation(libs.compose.ui.tooling) is not possible on a per-module basis.
+  `debugImplementation(libs.compose.ui.tooling)` is not possible on a per-module basis.
 
-An attempt was made to centralize previews in the composeApp module. While this was partially
-successful, previews that rely on Res.string resources fail to render. Please, have a look at:
+An attempt was made to centralize previews in the `composeApp` module. While this was partially
+successful, previews that rely on `Res.string` resources fail to render. Please, have a look at:
 [Previews](./composeApp/src/commonMain/kotlin/com/something/volkswagentechtask/previews)
 
-The application is structured around a central feature module that encapsulates all weather-related
-functionality. This approach decouples the feature and is comprised of six submodules:
+The application is structured into several modules to support scalable development and a clean
+separation of concerns. The modules are organized as follows:
 
-- [database](./feature-weather/database/src)
-- [networking](./feature-weather/networking/src)
-- [datastore](./feature-weather/datastore/src)
+**Feature Modules (`feature-weather`)**
+
+This group of six modules encapsulates all weather-related functionality:
+
 - [core](./feature-weather/core/src)
+- [database](./feature-weather/database/src)
+- [datastore](./feature-weather/datastore/src)
 - [domain](./feature-weather/domain/src)
+- [networking](./feature-weather/networking/src)
 - [weatherApp](./feature-weather/weatherApp/src)
 
-The primary purpose of structuring the project into feature modules is to support scalable
-development in a large codebase. This approach allows different teams to work independently on their
-respective modules, leading to significant benefits:
+**Application & Auxiliary Modules**
+
+These modules glue the features together and provide shared, app-wide functionality:
+
+- [composeApp](./composeApp/src)
+- [navigation](./navigation/src)
+- [di-qualifiers](./di-qualifiers/src)
+- [ui-theme](./ui-theme/src)
+
+The primary purpose of structuring the project into these modules is to support scalable development
+in a large codebase. This approach allows different teams to work independently, leading to
+significant benefits:
 
 - **Faster Build Times**: Gradle can cache unchanged modules, speeding up the overall build process.
-
 - **Reduced Merge Conflicts**: Teams working in isolated modules are less likely to create
   conflicting code changes.
-
 - **Improved Modularity**: Each feature is self-contained, making the codebase easier to understand
   and maintain.
-
 - **Simplified Testing**: Isolating features allows for more focused and straightforward unit and
   integration testing.
-
 - **Decoupled Dependencies**: Changes to dependencies or API configurations within one module do not
   affect others, ensuring stability across the application.
 
@@ -108,16 +114,16 @@ The `database` serves as the single source of truth for all weather data. It pow
 forecast list and the detailed forecast views. It consists of a single table that stores an 8-day
 weather forecast. The schema for each daily entry includes the following fields:
 
-- id -> database identifier
-- dt -> date of the forecast
-- sunrise -> Sunrise time, Unix, UTC.
-- sunset -> Sunset time, Unix, UTC.
-- summary -> Human-readable description of the weather conditions for the day
-- minTemp -> Min daily temperature
-- maxTemp -> Max daily temperature
-- windSpeed -> Wind speed, metre/sec
-- windDeg -> Wind gust, metre/sec
-- windGust -> Wind direction, degrees (meteorological)
+- `id` -> database identifier
+- `dt` -> date of the forecast
+- `sunrise` -> Sunrise time, Unix, UTC.
+- `sunset` -> Sunset time, Unix, UTC.
+- `summary` -> Human-readable description of the weather conditions for the day
+- `minTemp` -> Min daily temperature
+- `maxTemp` -> Max daily temperature
+- `windSpeed` -> Wind speed, metre/sec
+- `windDeg` -> Wind direction, degrees (meteorological)
+- `windGust` -> Wind gust, metre/sec
 
 ### networking (Android/iOS)
 
@@ -146,13 +152,13 @@ updates are seamlessly and automatically propagated to the presentation layer.
 
 The `domain` module serves as the architectural core of the application, containing all business
 logic and abstracting data operations. Following Clean Architecture principles, it inverts the flow
-of dependencies, ensuring that the data layer (`core`) adapts to the contracts defined here.This
+of dependencies, ensuring that the data layer (`core`) adapts to the contracts defined here. This
 design enforces a clean separation of concerns, as the presentation layer (`weatherApp`) is
 completely decoupled from the data implementation details, interacting only with the domain's public
 interfaces. The module itself maintains maximum independence, depending only on the dependency
 injection framework (Koin) and testing tools.
 
-### weatherAPP
+### weatherApp
 
 The `weatherApp` module is the final layer in this architecture, dedicated entirely to presentation.
 It communicates with the `domain` layer to access all application functionality, effectively
@@ -169,36 +175,54 @@ enhances testability, and prevents common state-related bugs like race condition
 
 The main differences between MVI and MVVM are the following:
 
-1. State → MVI uses a Single Immutable State object representing the entire screen
-   whereas MVVM can have partial and immutable state objects with multiple LiveData
-   or StateFlows for various UI elements
-2. Data Flow → MVI has an unidirectional data flow Intent → Model → State → View
-   whereas MVVM can have bidirectional, View observes ViewModel and ViewModel
-   can expose callbacks for View updates.
-3. Events → MVI has a finite number of events defined, and as such, can exhaustively
-   be processed and are easy to see all of them in one place. MVVM handles events via
-   functions or LiveData events in ViewModel.
-4. Reducer → MVI has a “reducer” function that receives an Intent from the UI and,
-   based on the event received and the current UiState, generates an new UiState
-   state = reducer(intent, state)
-5. Error Handling → MVI usually models errors explicitly in the UiState. MVVM error handling is
-   often mixed into LiveData and StateFlows.
+1. **State** → MVI uses a single immutable state object representing the entire screen, whereas MVVM
+   can have partial and mutable state objects with multiple `LiveData`or `StateFlows` for various UI
+   elements.
+2. **Data Flow** → MVI has a unidirectional data flow (Intent → Model → State → View), whereas MVVM
+   can be bidirectional (View observes ViewModel, and ViewModel can expose callbacks for View
+   updates).
+3. **Events** → MVI uses a finite number of defined events, which can be exhaustively processed and
+   are easy to view in one place. MVVM handles events via functions or `LiveData`events in the
+   ViewModel.
+4. **Reducer** → MVI often uses a “reducer” function that receives an Intent from the UI and,
+   based on the event and the current state, generates a new `UiState`:
+   `state = reducer(intent, state)`.
+5. **Error Handling** → MVI usually models errors explicitly in the `UiState`. In MVVM, error
+   handling is often mixed into `LiveData` and `StateFlows`.
 
-### composeAPP
+### composeApp
 
 The `composeApp` module acts as the primary application shell and the integration point for all
-feature modules. While individual features like weatherApp contain their own UI and presentation
+feature modules. While individual features like `weatherApp` contain their own UI and presentation
 logic, this module is responsible for higher-level application concerns:
 
-- Navigation: It defines the navigation graph, managing how the user moves between different screens
-  and features within the application.
-- Feature Integration: It serves as the place where multiple, otherwise independent, feature modules
-  are brought together to form a cohesive application.
-- Shared Application Logic: It can contain app-wide logic or UI components (like a main toolbar or
-  bottom navigation bar) that are common across all features.
+- **Feature Integration**: It serves as the place where multiple, otherwise independent, feature
+  modules are brought together to form a cohesive application.
+- **Shared Application Logic**: It can contain app-wide logic or UI components (like a main toolbar
+  or bottom navigation bar) that are common across all features.
 
 In essence, it is the module that transforms a collection of features into a complete, navigable
 application.
+
+### navigation
+
+The `navigation` module serves as a crucial architectural piece that decouples the application's
+navigation structure from its feature modules. It acts as a shared "contract," defining the possible
+navigation destinations so that the main `composeApp` and individual feature modules (like
+`weatherApp`) can communicate without creating direct dependencies.
+
+Its primary responsibilities include:
+
+- **Defining Navigation Keys**: It contains the `ScreenKey` sealed interface and its
+  implementations (e.g., `MainScreenKey`, `DetailScreenKey`). These keys act as unique identifiers
+  for each screen in the application.
+- **Decoupling Modules**: By having both the `composeApp` and `weatherApp` modules depend on the
+  `navigation` module, you avoid circular dependencies. The `weatherApp` module only needs to know
+  about the `ScreenKey`s it can handle, and the `composeApp` module can construct the navigation
+  graph without knowing the internal details of each feature.
+- **Enabling Scalability**: This pattern makes it easier to add new feature modules to the
+  application. A new feature would simply depend on the `navigation` module and define its own
+  `ScreenKey`s, which can then be integrated into the main navigation graph in `composeApp`.
 
 ### di-qualifiers
 
@@ -230,12 +254,10 @@ This modular approach is a key architectural decision with several benefits:
   about specific color codes or font sizes. They consume the theme, but they don't own it. This
   separation allows a dedicated team or developer to manage the application's visual identity
   independently.
-- **Enhanced Reusability**: The self-contained theme module can be easily shared and reused across
-  other projects, ensuring brand consistency beyond a single application.
 
 ## Libraries
 
-### Ktor VS OkHttp
+### Ktor vs. OkHttp
 
 Given that this is a Kotlin Multiplatform project, Ktor was the clear choice. It allows us to define
 the networking logic once and share it across both Android and iOS, which aligns perfectly with the
@@ -245,14 +267,14 @@ Android, allowing us to leverage OkHttp's reliability while still writing platfo
 Ktor is a networking framework from JetBrains, designed from the ground up for Kotlin and Kotlin
 Multiplatform. Its key advantages are:
 
-- Multiplatform by Design: It allows sharing the exact same networking code across Android, iOS, and
-  other platforms, which is its main advantage in a KMP context.
-- Coroutine-First: It is built on Kotlin coroutines, offering a clean, modern API for handling
+- **Multiplatform by Design**: It allows sharing the exact same networking code across Android, iOS,
+  and other platforms, which is its main advantage in a KMP context.
+- **Coroutine-First**: It is built on Kotlin coroutines, offering a clean, modern API for handling
   asynchronous operations.
-- Modular and Flexible: Ktor uses a plugin system, allowing you to include only the features you
+- **Modular and Flexible**: Ktor uses a plugin system, allowing you to include only the features you
   need, such as serialization, logging, or authentication.
 
-### Koin VS Dagger-Hilt
+### Koin vs. Dagger-Hilt
 
 Dagger-Hilt is Google's recommended DI library for Android. Its main strength lies in compile-time
 safety—it generates code during the build process, which catches dependency errors before the app
