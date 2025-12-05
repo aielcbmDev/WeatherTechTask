@@ -7,12 +7,12 @@ name: Run Checks
 # This section defines when the workflow will automatically run.
 # ---
 on:
-  # Run on every push to the "main" branch
+  # Run on every push to ANY branch
   push:
-    branches: [ "main" ]
-  # Run on every pull request that targets the "main" branch
+    branches: [ "**" ]
+  # Run on every pull request targeting ANY branch
   pull_request:
-    branches: [ "main" ]
+    branches: [ "**" ]
 
 # ---
 # This section defines the jobs to be executed.
