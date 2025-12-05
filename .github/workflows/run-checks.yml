@@ -53,10 +53,18 @@ jobs:
         run: chmod +x ./gradlew
 
       # Step 4: Run the 'check' command
-      # This is the exact command you fixed. It compiles the code and runs all
-      # verification tasks, including tests, for ALL targets (JVM, Android, iOS, etc.).
+      # It compiles the code and runs all verification tasks, including tests, for ALL targets (JVM,
+      # Android, iOS, etc.).
       - name: Run all checks with Gradle
         run: ./gradlew check
+
+      # Step 5: Upload Test Reports
+      - name: Upload test reports
+        if: always() # Run this even if the build-and-test step fails
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: '**/build/reports/tests/'
 
   # Job 2: Job to run assembleDebug
   assemble-debug:
@@ -82,9 +90,13 @@ jobs:
   lint:
     runs-on: macos-latest # Use the same runner
     steps:
+      # Step 1: Check out the repository's code
+      # This downloads your project code onto the runner.
       - name: Check out code
         uses: actions/checkout@v4
 
+      # Step 2: Set up the Java Development Kit (JDK)
+      # Kotlin Multiplatform projects require a JDK to run Gradle.
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -92,8 +104,19 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
+      # Step 3: Grant execute permission to the Gradle Wrapper
+      # On Unix-based systems (like macOS), the gradlew script needs to be executable.
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
+      # Step 4: Run the './gradlew lint' command
       - name: Run lint with Gradle
         run: ./gradlew lint
+
+      # Step 5: Upload Lint Reports
+      - name: Upload lint reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-reports
+          path: '**/build/reports/lint-results-*.html'
