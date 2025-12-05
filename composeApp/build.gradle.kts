@@ -39,6 +39,7 @@ kotlin {
             implementation(project(":feature-weather:weatherApp"))
             implementation(project(":di-qualifiers"))
             implementation(project(":ui-theme"))
+            implementation(project(":navigation"))
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)

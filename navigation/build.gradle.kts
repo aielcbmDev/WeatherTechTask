@@ -1,14 +1,7 @@
-import dev.mokkery.gradle.mokkery
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.androidLint)
-    alias(libs.plugins.mokkeryPlugin)
-    alias(libs.plugins.kotlinAllOpen)
-    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -17,10 +10,10 @@ kotlin {
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
-        namespace = "com.charly.weatherapp"
+        namespace = "com.charly.navigation"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
-        androidResources.enable = true
+
         withHostTestBuilder {
             sourceSetTreeName = "test"
         }
@@ -39,7 +32,7 @@ kotlin {
     // A step-by-step guide on how to include this library in an XCode
     // project can be found here:
     // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "weatherAppKit"
+    val xcfName = "navigationKit"
 
     iosX64 {
         binaries.framework {
@@ -68,33 +61,10 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlin.stdlib)
             // Add KMP dependencies here
-            implementation(project(":feature-weather:domain"))
-            implementation(project(":feature-weather:core"))
-            implementation(project(":di-qualifiers"))
-            implementation(project(":ui-theme"))
-            implementation(project(":navigation"))
-            implementation(libs.compose.runtime)
-            implementation(libs.compose.foundation)
-            implementation(libs.compose.material3)
-            implementation(libs.compose.ui)
-            implementation(libs.compose.components.resources)
-            implementation(libs.compose.ui.tooling.preview)
-
-            implementation(project.dependencies.platform(libs.koin.bom))
-            implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
-
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.kotlinx.material.icons.extended)
-            implementation(libs.ktor.serialization.kotlinx.json)
-
-            implementation(libs.androidx.nav3.ui)
         }
 
         commonTest.dependencies {
-            implementation(mokkery("coroutines"))
             implementation(libs.kotlinx.test)
-            implementation(libs.kotlinx.coroutines.test)
         }
 
         androidMain.dependencies {
@@ -116,21 +86,5 @@ kotlin {
             // on common by default and will correctly pull the iOS artifacts of any
             // KMP dependencies declared in commonMain.
         }
-    }
-}
-
-// this check might require adjustment depending on your project type and the tasks that you use
-// `endsWith("Test")` works with "*Test" tasks from Multiplatform projects, but it does not include
-// tasks like `check`
-fun isTestingTask(name: String) = name.endsWith("Test")
-
-val isTesting = gradle
-    .startParameter
-    .taskNames
-    .any(::isTestingTask)
-
-if (isTesting) {
-    allOpen {
-        annotation("com.charly.weatherapp.OpenClassForMocking")
     }
 }

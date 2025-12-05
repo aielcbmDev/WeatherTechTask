@@ -9,7 +9,7 @@ import com.charly.uitheme.LightColors
 import com.charly.uitheme.typography
 import com.charly.weatherapp.di.weatherAppModule
 import com.something.volkswagentechtask.di.appModule
-import com.something.volkswagentechtask.navigation.WeatherNavigationHost
+import com.something.volkswagentechtask.navigation.AppNavigationHost
 import org.koin.compose.KoinApplication
 import org.koin.dsl.KoinAppDeclaration
 
@@ -32,7 +32,7 @@ fun App(
             colorScheme = colorScheme,
             typography = typography
         ) {
-            WeatherNavigationHost()
+            AppNavigationHost()
         }
     }
 }
