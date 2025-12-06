@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.EntryProviderScope
-import androidx.navigation3.runtime.NavKey
-import com.charly.navigation.DetailScreenKey
-import com.charly.navigation.MainScreenKey
+import com.charly.navigation.ScreenKey
+import com.charly.navigation.ScreenKey.DetailScreenKey
+import com.charly.navigation.ScreenKey.MainScreenKey
 import com.charly.weatherapp.ui.detail.DetailViewIntent
 import com.charly.weatherapp.ui.detail.DetailViewModel
 import com.charly.weatherapp.ui.detail.screen.DetailScreen
@@ -17,8 +17,8 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun EntryProviderScope<NavKey>.AddWeatherFeatureEntries(
-    backStack: MutableList<NavKey>
+fun EntryProviderScope<ScreenKey>.AddWeatherFeatureEntries(
+    backStack: MutableList<ScreenKey>
 ) {
     entry<MainScreenKey> {
         val mainViewModel = koinViewModel<MainViewModel>()

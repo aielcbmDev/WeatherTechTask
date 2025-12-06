@@ -4,7 +4,11 @@ import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object MainScreenKey : NavKey
+sealed interface ScreenKey : NavKey {
 
-@Serializable
-data class DetailScreenKey(val id: Long) : NavKey
+    @Serializable
+    data object MainScreenKey : ScreenKey
+
+    @Serializable
+    data class DetailScreenKey(val id: Long) : ScreenKey
+}
