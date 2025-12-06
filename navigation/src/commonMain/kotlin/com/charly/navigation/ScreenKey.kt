@@ -1,6 +1,6 @@
 package com.charly.navigation
 
-sealed interface ScreenKey
+import androidx.navigation3.runtime.NavKey
 
-data object MainScreenKey : ScreenKey
-data class DetailScreenKey(val id: Long) : ScreenKey
+data object MainScreenKey : NavKey
+data class DetailScreenKey(val id: Long) : NavKey

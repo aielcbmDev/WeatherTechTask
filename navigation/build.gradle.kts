@@ -61,6 +61,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlin.stdlib)
             // Add KMP dependencies here
+            implementation(libs.androidx.nav3.ui)
         }
 
         commonTest.dependencies {
