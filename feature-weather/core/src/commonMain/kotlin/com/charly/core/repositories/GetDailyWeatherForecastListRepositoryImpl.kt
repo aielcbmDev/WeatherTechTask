@@ -34,8 +34,7 @@ class GetDailyWeatherForecastListRepositoryImpl(
     private suspend fun fetchAndSaveDailyWeatherForecast() {
         if (isCacheInvalid || timerCache.isCacheExpired()) {
             isCacheInvalid = false
-            val dailyWeatherForecastData =
-                weatherNetworkDataSource.getDailyWeatherForecastData()
+            val dailyWeatherForecastData = weatherNetworkDataSource.getDailyWeatherForecastData()
             val dailyEntityList = dailyWeatherForecastData.mapToDailyForecastEntityList()
             weatherDatabaseDataSource.deleteAndInsertListOfDailyWeatherForecast(dailyEntityList)
             timerCache.saveCacheTime()
