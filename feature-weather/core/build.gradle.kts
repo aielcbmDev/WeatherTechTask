@@ -76,7 +76,7 @@ kotlin {
             implementation(project(":feature-weather:domain"))
             implementation(project(":feature-weather:networking"))
             implementation(project(":feature-weather:database"))
-            implementation(project(":feature-weather:datastore"))
+            implementation(project(":common:datastore"))
             implementation(project(":common:di-qualifiers"))
 
             implementation(project.dependencies.platform(libs.koin.bom))
