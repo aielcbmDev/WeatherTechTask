@@ -77,7 +77,7 @@ kotlin {
             // Add KMP dependencies here
             implementation(project(":feature-weather:domain"))
             implementation(project(":feature-weather:core"))
-            implementation(project(":di-qualifiers"))
+            implementation(project(":common:di-qualifiers"))
             implementation(project(":ui-theme"))
             implementation(project(":navigation"))
             implementation(libs.compose.runtime)
