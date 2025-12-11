@@ -46,7 +46,7 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":feature-weather:weatherApp"))
             implementation(project(":common:di-qualifiers"))
-            implementation(project(":ui-theme"))
+            implementation(project(":common:ui-theme"))
             implementation(project(":common:navigation"))
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
