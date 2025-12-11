@@ -79,7 +79,7 @@ kotlin {
             implementation(project(":feature-weather:core"))
             implementation(project(":common:di-qualifiers"))
             implementation(project(":ui-theme"))
-            implementation(project(":navigation"))
+            implementation(project(":common:navigation"))
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
