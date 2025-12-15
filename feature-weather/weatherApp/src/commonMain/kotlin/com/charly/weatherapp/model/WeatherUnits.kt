@@ -4,6 +4,7 @@ import com.charly.weatherapp.model.WeatherUnits.IMPERIAL
 import com.charly.weatherapp.model.WeatherUnits.METRIC
 import com.charly.weatherapp.model.WeatherUnits.STANDARD
 
+
 /**
  * Defines the units of measurement for weather data returned by the API.
  * This affects values like temperature and wind speed.
