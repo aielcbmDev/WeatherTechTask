@@ -1,6 +1,6 @@
 package com.something.volkswagentechtask.apisecrets
 
-interface WeatherApiSecrets {
+fun interface WeatherApiSecrets {
 
     fun getWeatherApiKey(): String
 }
