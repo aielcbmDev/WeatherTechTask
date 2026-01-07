@@ -47,7 +47,7 @@ class WeatherApiServiceTest {
             every { createHttpClient() } returns createDummyHttpClient(mockEngine, contentType)
         }
         val weatherApiKey = "dummyApiKey"
-        val weatherApiService = WeatherApiService(
+        val weatherApiService = WeatherApiServiceImpl(
             weatherApiKey = weatherApiKey,
             weatherUnits = "standard",
             httpClient = httpClientFactory.createHttpClient()
@@ -77,7 +77,7 @@ class WeatherApiServiceTest {
                 every { createHttpClient() } returns createDummyHttpClient(mockEngine, contentType)
             }
             val weatherApiKey = "dummyApiKey"
-            val weatherApiService = WeatherApiService(
+            val weatherApiService = WeatherApiServiceImpl(
                 weatherApiKey = weatherApiKey,
                 weatherUnits = "standard",
                 httpClient = httpClientFactory.createHttpClient()

@@ -6,7 +6,9 @@ import com.charly.diqualifiers.DI_WEATHER_UNITS
 import com.charly.domain.di.domainModule
 import com.charly.weatherapp.configuration.WeatherConfigurations
 import com.charly.weatherapp.formatdata.datetime.DateFormatter
+import com.charly.weatherapp.formatdata.datetime.DateFormatterImpl
 import com.charly.weatherapp.formatdata.datetime.TimeFormatter
+import com.charly.weatherapp.formatdata.datetime.TimeFormatterImpl
 import com.charly.weatherapp.formatdata.degrees.DegreesFormatter
 import com.charly.weatherapp.formatdata.speed.SpeedFormatter
 import com.charly.weatherapp.formatdata.temperature.TemperatureFormatter
@@ -29,8 +31,8 @@ val weatherAppModule = module {
     single<WeatherUnits> { WeatherConfigurations.weatherUnits }
     single<String>(named(DI_WEATHER_UNITS)) { get<WeatherUnits>().units }
     factory<TimeZone> { WeatherConfigurations.timeZone }
-    factory<DateFormatter> { DateFormatter(timeZone = get()) }
-    factory<TimeFormatter> { TimeFormatter(timeZone = get()) }
+    factory<DateFormatter> { DateFormatterImpl(timeZone = get()) }
+    factory<TimeFormatter> { TimeFormatterImpl(timeZone = get()) }
     factory<SpeedFormatter> { SpeedFormatter(weatherUnits = get()) }
     factory<TemperatureFormatter> { TemperatureFormatter(weatherUnits = get()) }
     factory<DegreesFormatter> { DegreesFormatter() }

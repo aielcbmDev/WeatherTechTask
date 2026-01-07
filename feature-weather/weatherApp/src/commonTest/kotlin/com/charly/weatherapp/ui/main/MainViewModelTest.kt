@@ -2,7 +2,7 @@ package com.charly.weatherapp.ui.main
 
 import com.charly.domain.model.DailyForecast
 import com.charly.domain.usecases.GetDailyWeatherForecastListUseCase
-import com.charly.weatherapp.formatdata.datetime.DateFormatter
+import com.charly.weatherapp.formatdata.datetime.DateFormatterImpl
 import com.charly.weatherapp.provider.StringProvider
 import dev.mokkery.answering.returns
 import dev.mokkery.answering.throws
@@ -55,7 +55,7 @@ class MainViewModelTest {
         val getDailyWeatherForecastListUseCase = mock<GetDailyWeatherForecastListUseCase> {
             everySuspend { execute() } returns flowOf(dailyForecastList)
         }
-        val dateFormatter = DateFormatter(TimeZone.UTC)
+        val dateFormatter = DateFormatterImpl(TimeZone.UTC)
         val stringProvider = mock<StringProvider> {
             everySuspend { getStringForResource(Res.string.data_not_available_text) } returns "Not available"
         }
@@ -149,7 +149,7 @@ class MainViewModelTest {
         val getDailyWeatherForecastListUseCase = mock<GetDailyWeatherForecastListUseCase> {
             everySuspend { execute(any()) } returns flowOf(dailyForecastList)
         }
-        val dateFormatter = DateFormatter(TimeZone.UTC)
+        val dateFormatter = DateFormatterImpl(TimeZone.UTC)
         val stringProvider = mock<StringProvider> {
             everySuspend { getStringForResource(Res.string.data_not_available_text) } returns "Not available"
         }
@@ -245,7 +245,7 @@ class MainViewModelTest {
         val getDailyWeatherForecastListUseCase = mock<GetDailyWeatherForecastListUseCase> {
             everySuspend { execute() } throws Exception()
         }
-        val dateFormatter = DateFormatter(TimeZone.UTC)
+        val dateFormatter = DateFormatterImpl(TimeZone.UTC)
         val stringProvider = mock<StringProvider>()
         val mainViewModelReducer = MainViewModelReducer()
 

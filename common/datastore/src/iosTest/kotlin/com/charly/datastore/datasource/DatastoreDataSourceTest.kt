@@ -17,7 +17,7 @@ class DatastoreDataSourceTest {
         val testDataStore: DataStore<Preferences> = createDataStore()
         val expectedResult = 5L
         val key = "AnyKey"
-        val datastoreDataSource = DatastoreDataSource(testDataStore)
+        val datastoreDataSource = DatastoreDataSourceImpl(testDataStore)
         datastoreDataSource.saveLongValue(key, expectedResult)
 
         // WHEN

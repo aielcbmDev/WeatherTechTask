@@ -1,6 +1,7 @@
 package com.charly.networking.datasource
 
 import com.charly.networking.WeatherApiService
+import com.charly.networking.WeatherApiServiceImpl
 import com.charly.networking.httpclient.HttpClientFactory
 import com.charly.networking.model.DailyForecastWeatherData
 import dev.mokkery.answering.returns
@@ -49,7 +50,7 @@ class WeatherNetworkingDataSourceTest {
             every { createHttpClient() } returns createDummyHttpClient(mockEngine, contentType)
         }
         val weatherApiService =
-            WeatherApiService("whatever-key", "imperial", httpClientFactory.createHttpClient())
+            WeatherApiServiceImpl("whatever-key", "imperial", httpClientFactory.createHttpClient())
         val weatherNetworkingDataSource = WeatherNetworkingDataSource(weatherApiService)
 
         // WHEN
