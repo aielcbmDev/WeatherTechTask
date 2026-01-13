@@ -4,11 +4,11 @@ import com.charly.weatherapp.OpenClassForMocking
 import com.charly.weatherapp.model.WeatherUnits
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.display_data_with_units_text
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.imperial_speed_units
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.metric_speed_units
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.standard_speed_units
+import weathertechtask.feature_weather.weatherapp.generated.resources.Res
+import weathertechtask.feature_weather.weatherapp.generated.resources.display_data_with_units_text
+import weathertechtask.feature_weather.weatherapp.generated.resources.imperial_speed_units
+import weathertechtask.feature_weather.weatherapp.generated.resources.metric_speed_units
+import weathertechtask.feature_weather.weatherapp.generated.resources.standard_speed_units
 
 @OpenClassForMocking
 class SpeedFormatter(

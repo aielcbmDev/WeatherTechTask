@@ -19,8 +19,8 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.data_not_available_text
+import weathertechtask.feature_weather.weatherapp.generated.resources.Res
+import weathertechtask.feature_weather.weatherapp.generated.resources.data_not_available_text
 
 class MainViewModel(
     private val getDailyWeatherForecastListUseCase: GetDailyWeatherForecastListUseCase,

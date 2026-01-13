@@ -32,10 +32,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.main_screen_snack_bar_action_label
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.main_screen_snack_bar_message
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.main_screen_top_app_bar_title
+import weathertechtask.feature_weather.weatherapp.generated.resources.Res
+import weathertechtask.feature_weather.weatherapp.generated.resources.main_screen_snack_bar_action_label
+import weathertechtask.feature_weather.weatherapp.generated.resources.main_screen_snack_bar_message
+import weathertechtask.feature_weather.weatherapp.generated.resources.main_screen_top_app_bar_title
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -2,9 +2,9 @@ package com.charly.weatherapp.formatdata.degrees
 
 import com.charly.weatherapp.OpenClassForMocking
 import org.jetbrains.compose.resources.getString
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.degrees_units
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.display_data_with_units_text
+import weathertechtask.feature_weather.weatherapp.generated.resources.Res
+import weathertechtask.feature_weather.weatherapp.generated.resources.degrees_units
+import weathertechtask.feature_weather.weatherapp.generated.resources.display_data_with_units_text
 
 @OpenClassForMocking
 class DegreesFormatter {

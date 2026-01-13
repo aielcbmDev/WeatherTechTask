@@ -22,8 +22,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.data_not_available_text
+import weathertechtask.feature_weather.weatherapp.generated.resources.Res
+import weathertechtask.feature_weather.weatherapp.generated.resources.data_not_available_text
 
 class DetailViewModel(
     private val itemId: Long,

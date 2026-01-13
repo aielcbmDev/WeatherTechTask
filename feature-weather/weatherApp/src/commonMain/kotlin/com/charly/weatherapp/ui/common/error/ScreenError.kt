@@ -12,10 +12,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.charly.uitheme.TypographySize
 import org.jetbrains.compose.resources.stringResource
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.any_error
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.error_fix_suggestion
-import volkswagentechtask.feature_weather.weatherapp.generated.resources.retry_button_text
+import weathertechtask.feature_weather.weatherapp.generated.resources.Res
+import weathertechtask.feature_weather.weatherapp.generated.resources.any_error
+import weathertechtask.feature_weather.weatherapp.generated.resources.error_fix_suggestion
+import weathertechtask.feature_weather.weatherapp.generated.resources.retry_button_text
 
 @Composable
 fun ScreenError(
