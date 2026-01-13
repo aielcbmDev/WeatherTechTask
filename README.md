@@ -80,7 +80,6 @@ This group of six modules encapsulates all weather-related functionality:
 
 - [core](./feature-weather/core/src)
 - [database](./feature-weather/database/src)
-- [datastore](./feature-weather/datastore/src)
 - [domain](./feature-weather/domain/src)
 - [networking](./feature-weather/networking/src)
 - [weatherApp](./feature-weather/weatherApp/src)
@@ -90,9 +89,10 @@ This group of six modules encapsulates all weather-related functionality:
 These modules glue the features together and provide shared, app-wide functionality:
 
 - [composeApp](./composeApp/src)
-- [navigation](./navigation/src)
-- [di-qualifiers](./di-qualifiers/src)
-- [ui-theme](./ui-theme/src)
+- [datastore](./common/datastore/src)
+- [di-qualifiers](./common/di-qualifiers/src)
+- [navigation](./common/navigation/src)
+- [ui-theme](./common/ui-theme/src)
 
 The primary purpose of structuring the project into these modules is to support scalable development
 in a large codebase. This approach allows different teams to work independently, leading to
