@@ -86,10 +86,10 @@ sealed interface DetailUiState {
         val dailyForecastDetailModel: DailyForecastDetailModel,
     ) : DetailUiState
 
-    object Loading : DetailUiState
-    object Error : DetailUiState
+    data object Loading : DetailUiState
+    data object Error : DetailUiState
 }
 
 sealed interface DetailViewIntent {
-    object FetchDailyWeatherForecastById : DetailViewIntent
+    data object FetchDailyWeatherForecastById : DetailViewIntent
 }

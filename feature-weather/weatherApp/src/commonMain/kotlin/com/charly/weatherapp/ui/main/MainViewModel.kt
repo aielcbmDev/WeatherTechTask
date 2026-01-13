@@ -82,8 +82,8 @@ sealed interface MainUiState {
         val isRefreshing: Boolean = false
     ) : MainUiState
 
-    object Loading : MainUiState
-    object Error : MainUiState
+    data object Loading : MainUiState
+    data object Error : MainUiState
 }
 
 sealed interface MainViewIntent {
