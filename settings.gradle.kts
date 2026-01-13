@@ -1,4 +1,4 @@
-rootProject.name = "VolkswagenTechTask"
+rootProject.name = "WeatherTechTask"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
