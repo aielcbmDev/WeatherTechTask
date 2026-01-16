@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">WolkswagenTechTask</string>
+    <string name="app_name">WeatherTechTask</string>
 
-    <string name="main_screen_top_app_bar_title">Wolkswagen Technical Test</string>
+    <string name="main_screen_top_app_bar_title">Weather Technical Test</string>
     <string name="main_screen_snack_bar_message">Failed to update. Showing last known forecast.</string>
     <string name="main_screen_snack_bar_action_label">Retry</string>
 
