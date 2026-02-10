@@ -52,7 +52,7 @@ jobs:
       - run: chmod +x ./gradlew
 
       - name: Run all tests
-        run: ./gradlew check
+        run:  ./gradlew test
 
       - name: Upload test reports
         if: always()
@@ -99,4 +99,4 @@ jobs:
       - run: chmod +x ./gradlew
 
       - name: Compile iOS framework
-        run: ./gradlew :shared:compileKotlinIosSimulatorArm64
+        run: ./gradlew :composeApp:compileKotlinIosSimulatorArm64
