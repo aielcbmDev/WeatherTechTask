@@ -136,11 +136,10 @@ room {
     schemaDirectory("$projectDir/schemas")
 }
 
-// this check might require adjustment depending on your project type and the tasks that you use
-// `name.endsWith("Test") || name.endsWith("check")` works with "*Test", "check" and "allTests"
-// tasks from Multiplatform projects
-fun isTestingTask(name: String) =
-    name.endsWith("Test") || name.contentEquals("check") || name.endsWith("allTests")
+// This check might require adjustment depending on your project type and the tasks that you use.
+// Works with "*Test", "check", "*allTests" and "allUnitTests" tasks from Multiplatform projects.
+fun isTestingTask(name: String) = name.endsWith("Test") || name.contentEquals("check")
+        || name.endsWith("allTests") || name.contentEquals("allUnitTests")
 
 val isTesting = gradle
     .startParameter
