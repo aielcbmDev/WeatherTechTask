@@ -113,9 +113,10 @@ kotlin {
 }
 
 // this check might require adjustment depending on your project type and the tasks that you use
-// `name.endsWith("Test") || name.endsWith("check")` works with "*Test" and "check" tasks from
-// Multiplatform projects
-fun isTestingTask(name: String) = name.endsWith("Test") || name.endsWith("check")
+// `name.endsWith("Test") || name.endsWith("check")` works with "*Test", "check" and "allTests"
+// tasks from Multiplatform projects
+fun isTestingTask(name: String) =
+    name.endsWith("Test") || name.contentEquals("check") || name.endsWith("allTests")
 
 val isTesting = gradle
     .startParameter
