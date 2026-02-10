@@ -52,7 +52,7 @@ jobs:
       - run: chmod +x ./gradlew
 
       - name: Run all tests
-        run: ./gradlew :composeApp:allTests :feature-weather:weatherApp:allTests :feature-weather:domain:allTests :feature-weather:core:allTests :feature-weather:networking:allTests :feature-weather:database:allTests :common:datastore:allTests :common:di-qualifiers:allTests :common:ui-theme:allTests :common:navigation:allTests
+        run: ./gradlew allUnitTests
 
       - name: Upload test reports
         if: always()

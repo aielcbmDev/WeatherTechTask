@@ -122,22 +122,13 @@ tasks.register("allUnitTests") {
     group = "verification"
     description = "Runs all specified module tests dynamically"
 
-    // List of module paths
-    val modules = listOf(
-        "composeApp",
-        "feature-weather:weatherApp",
-        "feature-weather:domain",
-        "feature-weather:core",
-        "feature-weather:networking",
-        "feature-weather:database",
-        "common:datastore",
-        "common:di-qualifiers",
-        "common:ui-theme",
-        "common:navigation"
-    )
-
-    val testTasks = modules.mapNotNull { modulePath ->
-        project.findProject(":$modulePath")?.tasks?.findByName("allTests")
+    val testTasks = gradle.rootProject.subprojects.mapNotNull {
+        println("modulePath: ${it.path}")
+        val task = project.findProject(":${it.path}")?.tasks?.findByName("allTests")
+        println("task: $task")
+        task
     }
+
+    println("testTasks: $testTasks")
     dependsOn(testTasks)
 }
